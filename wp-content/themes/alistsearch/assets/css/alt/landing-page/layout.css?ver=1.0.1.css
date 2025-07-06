@@ -1,0 +1,144 @@
+/* Layout components */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1320px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 2rem 0;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0.5rem;
+}
+
+/**************************/
+/*                        */
+/*         Header         */
+/*                        */
+/**************************/
+
+#header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  height: 50px;
+  line-height: 50px;
+  z-index: 100;
+  box-shadow: none;
+  -webkit-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+@media only screen and (min-width: 1024px) {
+  #header {
+    height: 80px;
+    line-height: 80px;
+  }
+}
+
+}
+html #wpadminbar {
+  position: fixed;
+}
+.admin-bar #header {
+  top: 46px;
+}
+@media only screen and (min-width: 783px) {
+  .admin-bar #header {
+    top: 32px;
+  }
+}
+
+#header > .container {
+  height: 100%;
+}
+
+@media screen and (min-width: 1320px) {
+  #header .container {
+    max-width: 1320px;
+    padding: 0;
+  }
+}
+
+.logo {
+  margin: 0;
+  display: block;
+  float: left;
+  width: 230px;
+  height: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .logo {
+    width: 280px;
+  }
+}
+
+.logo a {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url(../../../images/a-list-search-dark-alt.png) center center no-repeat;
+  background-size: contain;
+}
