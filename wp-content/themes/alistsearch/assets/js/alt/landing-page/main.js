@@ -126,9 +126,9 @@ function renderCompanyPlacements(config) {
             <div class="swiper-slide">
                 <div class="placement-card">
                     <div class="placement-card__logo">
-                        <img src="${placement.logo}" alt="Company logo" class="company-logo">
+                        <img src="${placement.logo}" alt="Company logo" class="company-logo"${placement.size ? ` style="transform:scale(${placement.size})"` : ''}>
                     </div>
-                    <div class="placement-card__role">${placement.title}</div>
+                    <div class="placement-card__role">${placement.title || ''}</div>
                 </div>
             </div>
         `);
