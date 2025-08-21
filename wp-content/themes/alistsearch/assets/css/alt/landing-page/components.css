@@ -60,17 +60,16 @@
 
 .hero__role {
   color: var(--color-secondary);
-  height: 5rem;
   display: block;
 }
 
 .hero__cursor {
   display: inline-block;
   width: 4px;
-  height: 3.75rem;
+  height: 1em;
   background-color: var(--color-secondary);
   margin-left: 4px;
-  vertical-align: middle;
+  vertical-align: baseline;
   animation: blink 0.75s step-end infinite;
 }
 
@@ -191,7 +190,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 1.5rem 1rem;
-  text-align: center;
+  text-align: left;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;

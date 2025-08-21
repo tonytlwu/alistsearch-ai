@@ -15,16 +15,19 @@ class MetricsAnimator {
         // Refresh metric cards after dynamic rendering
         this.refreshMetricCards();
 
-        // Set up intersection observer
+        // Set up intersection observer for individual metric cards
         this.observer = new IntersectionObserver(
             (entries) => this.handleIntersection(entries),
             {
-                threshold: 0.5,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.1,
+                rootMargin: '0px 0px -10px 0px'
             }
         );
 
-        this.observer.observe(this.metricsSection);
+        // Observe each metric card individually
+        this.metricCards.forEach(card => {
+            this.observer.observe(card);
+        });
     }
 
     refreshMetricCards() {
@@ -33,12 +36,30 @@ class MetricsAnimator {
 
     handleIntersection(entries) {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !this.isAnimated) {
-                this.animateMetrics();
-                this.isAnimated = true;
-                this.observer.disconnect();
+            if (entry.isIntersecting) {
+                const card = entry.target;
+
+                // Check if this card has already been animated
+                if (!card.classList.contains('animated')) {
+                    this.animateCard(card);
+                    card.classList.add('animated');
+                }
+
+                // Stop observing this card once it's animated
+                this.observer.unobserve(card);
             }
         });
+    }
+
+    animateCard(card) {
+        // Fade in the metrics section if it hasn't been done yet
+        if (!this.metricsSection.classList.contains('animate')) {
+            this.metricsSection.classList.add('animate');
+        }
+
+        // Animate this specific card
+        card.classList.add('animate-in');
+        this.animateNumber(card);
     }
 
     animateMetrics() {
