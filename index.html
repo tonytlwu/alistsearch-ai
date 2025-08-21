@@ -72,8 +72,7 @@
 <link rel='stylesheet' id='theme-alt-style-base-css' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/base.css' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-alt-style-layout-css' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-alt-style-components-css' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css' type='text/css' media='all' />
-<link rel="https://api.w.org/" href="https://alistsearch.ai/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://alistsearch.ai/wp-json/wp/v2/pages/17769" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://alistsearch.ai/xmlrpc.php?rsd" />
-<meta name="generator" content="WordPress 6.7.2" />
+<link rel="https://api.w.org/" href="https://alistsearch.ai/wp-json/" />
 <link rel='shortlink' href='https://alistsearch.ai/' />
 	<meta property="og:image" content="https://alistsearch.ai/wp-content/themes/alistsearch/assets/images/alist-og-logo.jpg" />
 </head>
@@ -200,6 +199,42 @@
       url: "https://calendly.com/allen-ackerman/15-minute-zoom-clone"
     },
 
+    // Metrics section configuration
+    // Displays key performance metrics with animations
+    metrics: {
+      // Array of metric objects to display
+      data: [
+        {
+          id: 'accuracy',
+          value: 98,
+          unit: '%',
+          label: 'Accuracy',
+          description: 'of candidates presented are interviewed'
+        },
+        {
+          id: 'speed',
+          value: 5,
+          unit: '',
+          label: 'Speed',
+          description: 'qualified candidates within 2 weeks'
+        },
+        {
+          id: 'time-to-close',
+          value: 4,
+          unit: 'weeks',
+          label: 'Time to Close',
+          description: 'average time to close'
+        },
+        {
+          id: 'retention',
+          value: 94,
+          unit: '%',
+          label: 'Retention',
+          description: 'still in seat after 24 months'
+        }
+      ]
+    },
+
     // Final call-to-action section configuration
     // Appears at the bottom of the page to drive conversions
     finalCta: {
@@ -234,6 +269,13 @@
       <p class="hero__description"></p>
       <div class="hero__cta">
         <a href="index.html#" class="button button--primary js-cta-link">Book an appointment</a>
+      </div>
+
+      <!-- Metrics Section -->
+      <div class="hero__metrics" id="metrics-section">
+        <div class="metrics-grid">
+          <!-- Metrics populated dynamically by JavaScript from pageConfig.metrics.data -->
+        </div>
       </div>
     </div>
   </section>

@@ -1,3 +1,92 @@
+class MetricsAnimator {
+    constructor(config = null) {
+        this.metricsSection = document.getElementById('metrics-section');
+        this.metricCards = document.querySelectorAll('.metric-card');
+        this.isAnimated = false;
+        this.observer = null;
+        this.config = config;
+
+        this.init();
+    }
+
+        init() {
+        if (!this.metricsSection) return;
+
+        // Refresh metric cards after dynamic rendering
+        this.refreshMetricCards();
+
+        // Set up intersection observer
+        this.observer = new IntersectionObserver(
+            (entries) => this.handleIntersection(entries),
+            {
+                threshold: 0.5,
+                rootMargin: '0px 0px -50px 0px'
+            }
+        );
+
+        this.observer.observe(this.metricsSection);
+    }
+
+    refreshMetricCards() {
+        this.metricCards = document.querySelectorAll('.metric-card');
+    }
+
+    handleIntersection(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !this.isAnimated) {
+                this.animateMetrics();
+                this.isAnimated = true;
+                this.observer.disconnect();
+            }
+        });
+    }
+
+    animateMetrics() {
+        // Fade in the entire metrics section
+        this.metricsSection.classList.add('animate');
+
+        // Animate each card with staggered timing
+        this.metricCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('animate-in');
+                this.animateNumber(card);
+            }, index * 200);
+        });
+    }
+
+    animateNumber(card) {
+        const numberElement = card.querySelector('.metric-card__number');
+        const target = parseInt(numberElement.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const startTime = performance.now();
+
+        const updateNumber = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Use easeOutQuart for smooth animation
+            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            const current = Math.floor(easeOutQuart * target);
+
+            numberElement.textContent = current;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateNumber);
+            } else {
+                numberElement.textContent = target;
+            }
+        };
+
+        requestAnimationFrame(updateNumber);
+    }
+
+    destroy() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+    }
+}
+
 class RoleTyper {
     constructor(elementId, roles) {
         this.element = document.getElementById(elementId);
@@ -192,6 +281,34 @@ function renderFinalCta(config) {
     finalCta.querySelector('p').textContent = config.finalCta.description;
 }
 
+function renderMetrics(config) {
+    if (!config.metrics || !config.metrics.data) return;
+
+    const metricsGrid = document.querySelector('.metrics-grid');
+    if (!metricsGrid) return;
+
+    const metricsData = config.metrics.data;
+    const metricCount = metricsData.length;
+
+    // Set the data-count attribute for flexible grid styling
+    metricsGrid.setAttribute('data-count', metricCount);
+
+    // Generate HTML for each metric
+    const metricsHTML = metricsData.map(metric => `
+        <div class="metric-card" data-metric="${metric.id}">
+            <div class="metric-card__label">${metric.label}</div>
+            <div class="metric-card__number" data-target="${metric.value}">0</div>
+            <div class="metric-card__unit">${metric.unit}</div>
+            <div class="metric-card__description">${metric.description}</div>
+        </div>
+    `).join('');
+
+    // Update the grid HTML
+    metricsGrid.innerHTML = metricsHTML;
+
+    return metricCount;
+}
+
 function initializeCtaLinks(config) {
     const ctaLinks = document.querySelectorAll('.js-cta-link');
 
@@ -211,6 +328,17 @@ function initializePage(config) {
     const roleTyper = new RoleTyper('role', config.roles);
     roleTyper.type();
 
+    // Render all sections
+    renderHeroSection(config);
+    renderMetrics(config); // Render metrics before initializing animation
+    const swiper = renderCompanyPlacements(config.companyPlacements);
+    renderTrustFeatures(config.trustFeatures);
+    renderTestimonial(config);
+    renderFinalCta(config);
+
+    // Initialize metrics animation after metrics are rendered
+    const metricsAnimator = new MetricsAnimator(config);
+
     // Update video section only if video URL is provided
     const videoSection = document.querySelector('.video-section');
     if (config.video?.url) {
@@ -221,13 +349,6 @@ function initializePage(config) {
     } else {
         videoSection.style.display = 'none';
     }
-
-    // Render all sections
-    renderHeroSection(config);
-    const swiper = renderCompanyPlacements(config.companyPlacements);
-    renderTrustFeatures(config.trustFeatures);
-    renderTestimonial(config);
-    renderFinalCta(config);
 
     // Initialize CTA links
     initializeCtaLinks(config);
