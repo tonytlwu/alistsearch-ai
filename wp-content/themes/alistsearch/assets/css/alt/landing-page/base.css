@@ -38,12 +38,10 @@
   --duration-fast: 0.2s;
   --duration-normal: 0.3s;
   --duration-slow: 0.6s;
-  --duration-extra-slow: 1.2s;
   
   /* Easing curves */
   --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   
   /* Border radius system */
   --radius-sm: 8px;
@@ -69,12 +67,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   
-  /* Scroll snapping for smooth navigation */
-  scroll-snap-type: y proximity;
   
   /* Performance optimizations */
   will-change: auto;
-  contain: layout style paint;
 }
 
 /* Enhanced Typography System */
