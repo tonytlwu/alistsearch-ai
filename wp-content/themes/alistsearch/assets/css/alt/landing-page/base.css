@@ -1,40 +1,123 @@
-/* Base styles */
+/* Base styles with enhanced color system */
 :root {
-  --color-primary: #303a6d;
-  --color-primary-dark: hsl(230, 46%, 24%);
-  --color-primary-light: #4f5b96;
+  /* Enhanced primary colors with depth */
+  --color-primary: #2d3561;
+  --color-primary-dark: hsl(230, 46%, 20%);
+  --color-primary-light: #4a5596;
   --color-primary-text: #ffffff;
-  --color-secondary: #b58e67;
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
-  --color-gray-200: #e5e7eb;
-  --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
-  --color-gray-500: #6b7280;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1f2937;
-  --color-gray-900: #111827;
+  --color-secondary: #d4a574;
+  --color-secondary-light: #e6c29c;
+  --color-secondary-dark: #b8945e;
+  
+  /* Enhanced grayscale palette */
+  --color-gray-50: #fafbfc;
+  --color-gray-100: #f4f6f8;
+  --color-gray-200: #e8ecef;
+  --color-gray-300: #d6dde4;
+  --color-gray-400: #a3adb8;
+  --color-gray-500: #73808d;
+  --color-gray-600: #525f6d;
+  --color-gray-700: #394047;
+  --color-gray-800: #212529;
+  --color-gray-900: #0f1419;
+  
+  /* Advanced gradient variables */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  --gradient-hero: linear-gradient(135deg, var(--color-primary) 0%, #1a1f3a 50%, #000000 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  
+  /* Shadow system */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.16);
+  --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 30px rgba(212, 165, 116, 0.3);
+  
+  /* Animation durations */
+  --duration-fast: 0.2s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.6s;
+  --duration-extra-slow: 1.2s;
+  
+  /* Easing curves */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Border radius system */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 50%;
 }
 
+/* Enhanced body with smooth scrolling */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
   color: var(--color-gray-900);
   margin: 0;
   min-height: 100vh;
-  /* background: linear-gradient(to bottom right, var(--color-gray-50), var(--color-gray-100)); */
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
+  
+  /* Enhanced font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Scroll snapping for smooth navigation */
+  scroll-snap-type: y proximity;
+  
+  /* Performance optimizations */
+  will-change: auto;
+  contain: layout style paint;
 }
 
-/* Typography */
+/* Enhanced Typography System */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 700;
   line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
 }
 
 p {
   margin: 0;
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+}
+
+/* Enhanced link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+a:hover {
+  color: var(--color-secondary);
 }
 
 .sr-only {

@@ -5,6 +5,7 @@ class MetricsAnimator {
         this.isAnimated = false;
         this.observer = null;
         this.config = config;
+        this.staggerDelay = 150; // Delay between card animations
 
         this.init();
     }
@@ -57,9 +58,14 @@ class MetricsAnimator {
             this.metricsSection.classList.add('animate');
         }
 
-        // Animate this specific card
-        card.classList.add('animate-in');
-        this.animateNumber(card);
+        // Get the card index for staggered animation
+        const cardIndex = Array.from(this.metricCards).indexOf(card);
+        
+        // Apply staggered animation delay
+        setTimeout(() => {
+            card.classList.add('animate-in');
+            this.animateNumber(card);
+        }, cardIndex * this.staggerDelay);
     }
 
     animateMetrics() {
@@ -78,23 +84,36 @@ class MetricsAnimator {
     animateNumber(card) {
         const numberElement = card.querySelector('.metric-card__number');
         const target = parseInt(numberElement.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
+        const duration = 2500; // Slightly longer for more dramatic effect
         const startTime = performance.now();
 
         const updateNumber = (currentTime) => {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
 
-            // Use easeOutQuart for smooth animation
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(easeOutQuart * target);
-
-            numberElement.textContent = current;
+            // Enhanced easing with bounce effect at the end
+            let easeProgress;
+            if (progress < 0.8) {
+                // Smooth acceleration for first 80%
+                easeProgress = 1 - Math.pow(1 - (progress / 0.8), 3);
+            } else {
+                // Slight bounce for the last 20%
+                const bounceProgress = (progress - 0.8) / 0.2;
+                easeProgress = 1 + (Math.sin(bounceProgress * Math.PI * 2) * 0.1 * (1 - bounceProgress));
+            }
+            
+            const current = Math.floor(easeProgress * target);
+            numberElement.textContent = Math.max(0, Math.min(current, target));
 
             if (progress < 1) {
                 requestAnimationFrame(updateNumber);
             } else {
                 numberElement.textContent = target;
+                // Add a subtle celebration effect
+                card.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
             }
         };
 
@@ -142,128 +161,112 @@ class RoleTyper {
     }
 }
 
-function getOptimalSlidesPerView(totalSlides) {
-    // For desktop view, determine optimal number of slides
-    if (totalSlides <= 2) return totalSlides; // Show 1 or 2 slides
-    if (totalSlides <= 4) return 3; // For 3-4 slides, show 3 at a time
-    return 4; // Default to 4 columns for more slides
-}
+// Custom Infinite Scroll Carousel Controller
+class InfiniteCarousel {
+    constructor(container, items) {
+        this.container = container;
+        this.track = container.querySelector('.carousel-track');
+        this.items = items;
+        this.init();
+    }
 
-// Adjustable autoplay speed - controls how fast the carousel moves
-// Higher values = slower movement (milliseconds per transition)
-const carouselSpeed = 8000;
+    init() {
+        this.createCarouselItems();
+        this.setupInfiniteLoop();
+        this.addInteractionHandlers();
+    }
 
-function initializeSwiper(totalSlides) {
-    const desktopSlidesPerView = getOptimalSlidesPerView(totalSlides);
+    createCarouselItems() {
+        // Create items twice for seamless infinite loop
+        const itemsHTML = this.items.map(item => this.createItemHTML(item)).join('');
+        this.track.innerHTML = itemsHTML + itemsHTML; // Duplicate for infinite loop
+    }
 
-    return new Swiper('.company-placements', {
-        slidesPerView: 1.75, // Show partial next slide on smallest screens
-        spaceBetween: 16, // Reduced space between slides
-        grabCursor: true,
-        loop: true,
-        loopedSlides: totalSlides * 2, // Ensure we have enough slides for smooth infinite looping
+    createItemHTML(item) {
+        return `
+            <div class="placement-card">
+                <div class="placement-card__logo">
+                    <img src="${item.logo}" alt="Company logo" class="company-logo"${item.size ? ` style="transform:scale(${item.size})"` : ''}>
+                </div>
+            </div>
+        `;
+    }
 
-        // Autoplay configuration for continuous movement
-        autoplay: {
-            delay: 1,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false
-        },
-
-        // Speed of transition (higher = slower)
-        speed: carouselSpeed,
-
-        // Responsive breakpoints
-        breakpoints: {
-            // Small mobile (320px+)
-            320: {
-                slidesPerView: 1.75,
-                spaceBetween: 16
-            },
-            // Medium mobile (480px+)
-            480: {
-                slidesPerView: 2,
-                spaceBetween: 20
-            },
-            // Tablet
-            768: {
-                slidesPerView: 2.5,
-                spaceBetween: 24
-            },
-            // Desktop
-            1024: {
-                slidesPerView: desktopSlidesPerView,
-                spaceBetween: 32
+    setupInfiniteLoop() {
+        // Calculate total width for animation
+        const itemWidth = 260 + 24; // card width + margin
+        const totalWidth = this.items.length * itemWidth;
+        
+        // Set CSS custom property for animation distance
+        this.track.style.setProperty('--scroll-distance', `-${totalWidth}px`);
+        
+        // Update animation with calculated distance
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes infiniteScroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(${-totalWidth}px); }
             }
-        },
+        `;
+        document.head.appendChild(style);
+    }
 
-        // Accessibility
-        a11y: {
-            prevSlideMessage: 'Previous slide',
-            nextSlideMessage: 'Next slide',
-            firstSlideMessage: 'This is the first slide',
-            lastSlideMessage: 'This is the last slide',
-        },
+    addInteractionHandlers() {
+        // Enhanced hover effects with staggered animations
+        const cards = this.track.querySelectorAll('.placement-card');
+        
+        cards.forEach((card, index) => {
+            card.addEventListener('mouseenter', () => {
+                this.addHoverEffect(card, index);
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                this.removeHoverEffect(card);
+            });
+        });
+    }
 
-        // Events
-        on: {
-            init: function() {
-                // Apply linear transition for smooth continuous scrolling
-                const swiperWrapper = this.wrapperEl;
-                swiperWrapper.style.transitionTimingFunction = 'linear';
-            },
-            beforeTransitionStart: function() {
-                // Ensure linear timing function is maintained
-                this.wrapperEl.style.transitionTimingFunction = 'linear';
+    addHoverEffect(card, index) {
+        // Add ripple effect to neighboring cards
+        const cards = Array.from(this.track.querySelectorAll('.placement-card'));
+        const neighbors = [
+            cards[index - 1],
+            cards[index + 1],
+            cards[index - 1 + this.items.length], // Duplicate set
+            cards[index + 1 + this.items.length]  // Duplicate set
+        ].filter(Boolean);
+        
+        neighbors.forEach(neighbor => {
+            if (neighbor) {
+                neighbor.style.transform = 'translateY(-4px) scale(1.02)';
+                neighbor.style.transition = 'all 0.3s ease-out';
             }
-        }
-    });
+        });
+    }
+
+    removeHoverEffect(card) {
+        // Reset neighboring cards
+        const cards = this.track.querySelectorAll('.placement-card');
+        cards.forEach(neighborCard => {
+            if (neighborCard !== card) {
+                neighborCard.style.transform = '';
+            }
+        });
+    }
 }
 
 function renderCompanyPlacements(config) {
     const section = document.querySelector('.credibility--companies');
-    const wrapper = document.querySelector('.swiper-wrapper');
+    const container = document.querySelector('.company-placements');
 
+    // Set section content
     section.querySelector('.credibility__title').textContent = config.title;
     section.querySelector('.credibility__subtitle').textContent = config.subtitle;
 
-    // Create one slide per placement
-    let slides = [];
-
-    // Use the new placements array structure
-    config.placements.forEach(placement => {
-        slides.push(`
-            <div class="swiper-slide">
-                <div class="placement-card">
-                    <div class="placement-card__logo">
-                        <img src="${placement.logo}" alt="Company logo" class="company-logo"${placement.size ? ` style="transform:scale(${placement.size})"` : ''}>
-                    </div>
-                    <div class="placement-card__role">${placement.title || ''}</div>
-                </div>
-            </div>
-        `);
-    });
-
-    // Set the slides in the wrapper
-    wrapper.innerHTML = slides.join('');
-
-    // Initialize Swiper after content is rendered
-    const swiper = initializeSwiper(slides.length);
-
-    // Add CSS for truly continuous scrolling
-    const style = document.createElement('style');
-    style.textContent = `
-        .swiper-wrapper {
-            transition-timing-function: linear !important;
-        }
-
-        .company-placements .swiper-slide {
-            transition: transform 0.1s linear;
-        }
-    `;
-    document.head.appendChild(style);
-
-    return swiper;
+    // Initialize custom carousel
+    const carousel = new InfiniteCarousel(container, config.placements);
+    
+    return carousel;
 }
 
 function renderTrustFeatures(config) {
@@ -344,6 +347,177 @@ function initializeCtaLinks(config) {
     });
 }
 
+// Enhanced scroll-based animations and interactions
+class ScrollAnimationController {
+    constructor() {
+        this.animatedElements = new Set();
+        this.scrollPosition = 0;
+        this.ticking = false;
+        
+        this.init();
+    }
+
+    init() {
+        // Throttled scroll handler for performance
+        window.addEventListener('scroll', () => {
+            if (!this.ticking) {
+                requestAnimationFrame(() => {
+                    this.handleScroll();
+                    this.ticking = false;
+                });
+                this.ticking = true;
+            }
+        });
+
+        // Initialize reveal animations
+        this.initializeRevealElements();
+        
+        // Check initial visibility on load (important for page refreshes)
+        setTimeout(() => {
+            this.updateRevealElements();
+        }, 100);
+    }
+
+    handleScroll() {
+        this.scrollPosition = window.pageYOffset;
+        this.updateRevealElements();
+    }
+
+    initializeRevealElements() {
+        // Add reveal animation to cards and sections
+        const cards = document.querySelectorAll('.card, .placement-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.setAttribute('data-reveal', 'true');
+            card.setAttribute('data-delay', index * 100);
+        });
+
+        // Add reveal to section titles
+        const titles = document.querySelectorAll('.credibility__title, .trust-features__title, .final-cta h2');
+        titles.forEach(title => {
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(20px)';
+            title.setAttribute('data-reveal', 'true');
+        });
+    }
+
+    updateRevealElements() {
+        const revealElements = document.querySelectorAll('[data-reveal]:not(.revealed)');
+        revealElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight * 0.8;
+            
+            if (isVisible) {
+                const delay = parseInt(element.getAttribute('data-delay')) || 0;
+                setTimeout(() => {
+                    element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                    element.classList.add('revealed');
+                }, delay);
+            }
+        });
+    }
+}
+
+
+// Scroll Indicator Controller
+class ScrollIndicatorController {
+    constructor() {
+        this.indicator = document.querySelector('.scroll-indicator');
+        this.hero = document.querySelector('.hero');
+        this.init();
+    }
+
+    init() {
+        if (!this.indicator) return;
+
+        // Add click handler for smooth scrolling
+        this.indicator.addEventListener('click', () => {
+            const nextSection = document.querySelector('.credibility');
+            if (nextSection) {
+                nextSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+
+        // Hide indicator when user scrolls past hero section
+        this.setupScrollListener();
+    }
+
+    setupScrollListener() {
+        let ticking = false;
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    this.updateIndicatorVisibility();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
+
+    updateIndicatorVisibility() {
+        if (!this.hero || !this.indicator) return;
+
+        const heroRect = this.hero.getBoundingClientRect();
+        const heroBottom = heroRect.bottom;
+        
+        // Hide indicator when hero section is mostly out of view
+        if (heroBottom < window.innerHeight * 0.3) {
+            this.indicator.style.opacity = '0';
+            this.indicator.style.pointerEvents = 'none';
+        } else {
+            this.indicator.style.opacity = '';
+            this.indicator.style.pointerEvents = '';
+        }
+    }
+}
+
+// Enhanced performance monitoring
+class PerformanceOptimizer {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        // Add will-change property to animated elements on scroll start
+        let scrollTimer = null;
+        window.addEventListener('scroll', () => {
+            if (scrollTimer !== null) {
+                clearTimeout(scrollTimer);
+            }
+
+            // Add will-change during scroll
+            document.body.style.willChange = 'transform';
+
+            scrollTimer = setTimeout(() => {
+                // Remove will-change after scrolling stops
+                document.body.style.willChange = 'auto';
+            }, 150);
+        });
+
+        // Preload critical images
+        this.preloadCriticalImages();
+    }
+
+    preloadCriticalImages() {
+        const criticalImages = document.querySelectorAll('img[data-critical]');
+        criticalImages.forEach(img => {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'image';
+            preloadLink.href = img.src;
+            document.head.appendChild(preloadLink);
+        });
+    }
+}
+
 function initializePage(config) {
     // Initialize typing animation
     const roleTyper = new RoleTyper('role', config.roles);
@@ -373,6 +547,13 @@ function initializePage(config) {
 
     // Initialize CTA links
     initializeCtaLinks(config);
+
+    // Initialize enhanced interactions and animations
+    setTimeout(() => {
+        new ScrollAnimationController();
+        new ScrollIndicatorController();
+        new PerformanceOptimizer();
+    }, 100); // Small delay to ensure DOM is fully ready
 }
 
 document.addEventListener('DOMContentLoaded', () => {

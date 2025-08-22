@@ -29,7 +29,9 @@
 	<meta name="msapplication-TileImage" content="https://alistsearch.ai/wp-content/themes/alistsearch/assets/images/favicons/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" type="text/css" />
 	<link rel="pingback" href="https://alistsearch.ai/xmlrpc.php" />
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
@@ -68,7 +70,6 @@
 :where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
 :root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
 </style>
-<link rel='stylesheet' id='theme-vendor-style-swiper-css' href='./wp-content/themes/alistsearch/assets/vendors/swiperjs/swiper-bundle.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-alt-style-base-css' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/base.css' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-alt-style-layout-css' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css' type='text/css' media='all' />
 <link rel='stylesheet' id='theme-alt-style-components-css' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css' type='text/css' media='all' />
@@ -277,6 +278,16 @@
           <!-- Metrics populated dynamically by JavaScript from pageConfig.metrics.data -->
         </div>
       </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-indicator">
+        <div class="scroll-indicator__arrow">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M7 13L12 18L17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 6L12 11L17 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -286,10 +297,10 @@
       <h2 class="credibility__title"></h2>
       <p class="credibility__subtitle"></p>
     </div>
-    <div class="swiper company-placements">
-      <div class="swiper-wrapper"></div>
-      <!-- Pagination removed for continuous autoplay -->
-      <!-- Navigation arrows removed for continuous autoplay -->
+    <div class="company-placements">
+      <div class="carousel-track">
+        <!-- Company logos will be populated by JavaScript -->
+      </div>
     </div>
   </section>
 
@@ -353,7 +364,6 @@
 </footer>
 
 
-<script type="text/javascript" src="./wp-content/themes/alistsearch/assets/vendors/swiperjs/swiper-bundle.min.js" id="theme-vendor-js-swiper-js"></script>
 <script type="text/javascript" src="./wp-content/themes/alistsearch/assets/js/alt/landing-page/main.js" id="theme-alt-js-main-js"></script>
 </body>
 </html>
