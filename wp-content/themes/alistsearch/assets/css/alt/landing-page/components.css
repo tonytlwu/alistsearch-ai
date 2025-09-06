@@ -630,7 +630,7 @@
 /* Custom Infinite Scroll Carousel */
 .company-placements {
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   z-index: 2;
   padding: 20px 0;
@@ -644,7 +644,7 @@
   display: flex;
   align-items: center;
   width: max-content;
-  animation: infiniteScroll 30s linear infinite;
+  animation: infiniteScroll 60s linear infinite;
   will-change: transform;
 }
 
@@ -669,11 +669,9 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding: 1.5rem;
   background: transparent;
   margin: 0 12px;
   position: relative;
-  overflow: hidden;
   transition: all var(--duration-normal) var(--ease-out);
 }
 
@@ -682,21 +680,9 @@
   transform: translateY(-8px) scale(1.05);
 }
 
-@media (min-width: 480px) {
-  .placement-card {
-    padding: 1.5rem 0.2rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .placement-card {
-    padding: 2rem 0.2rem;
-  }
-}
-
 .placement-card__logo {
   margin: 0;
-  height: 80px;
+  height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -704,39 +690,13 @@
   position: relative;
   z-index: 2;
   transition: all var(--duration-normal) var(--ease-out);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
 .placement-card:hover .placement-card__logo {
   transform: scale(1.1);
-}
-
-@media (min-width: 480px) {
-  .placement-card__logo {
-    height: 70px;
-    margin-bottom: 1.25rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .placement-card__logo {
-    height: 80px;
-    margin-bottom: 1.5rem;
-  }
-}
-
-.company-logo {
-  max-height: 100%;
-  max-width: 200px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  background: transparent;
-  transition: all var(--duration-normal) var(--ease-out);
-}
-
-.placement-card:hover .company-logo {
-  transform: scale(1.05);
 }
 
 .placement-card__role {
@@ -1134,7 +1094,7 @@
   transform: translate(-50%, -50%);
   opacity: 0.7;
   transition: opacity var(--duration-normal) var(--ease-out);
-  
+
   /* Play button triangle */
   clip-path: polygon(35% 25%, 75% 50%, 35% 75%);
 }
@@ -1147,19 +1107,19 @@
   .video-thumbnail {
     width: 100px;
   }
-  
+
   .video-thumbnail img {
     height: 56px;
   }
-  
+
   .video-thumbnail::after {
     top: 28px;
   }
-  
+
   .video-thumbnail__title {
     font-size: 0.675rem;
   }
-  
+
   .video-thumbnails {
     gap: 0.5rem;
   }

@@ -126,11 +126,10 @@ class InfiniteCarousel {
     }
 
     createItemHTML(item) {
-        const scaleStyle = item.size ? ` style="transform:scale(${item.size})"` : '';
+        const scaleStyle = item.size ? ` background-size: ${item.size * 100}%;` : '';
         return `
             <div class="placement-card">
-                <div class="placement-card__logo">
-                    <img src="${item.logo}" alt="Company logo" class="company-logo"${scaleStyle}>
+                <div class="placement-card__logo" style="background-image: url('${item.logo}');${scaleStyle}">
                 </div>
             </div>
         `;
