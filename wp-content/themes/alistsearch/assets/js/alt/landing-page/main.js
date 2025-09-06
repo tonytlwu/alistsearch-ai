@@ -208,6 +208,65 @@ function renderMetrics(config) {
     `).join('');
 }
 
+function renderVideoSection(config) {
+    const videoSection = document.querySelector('.video-section');
+    const videosConfig = config.videos || (config.video ? [config.video] : []);
+    
+    if (!videosConfig.length) {
+        videoSection.style.display = 'none';
+        return;
+    }
+    
+    videoSection.style.display = 'block';
+    
+    const thumbnailsContainer = videoSection.querySelector('.video-thumbnails');
+    const videoIframe = videoSection.querySelector('iframe');
+    
+    // If only one video, hide thumbnails and show video directly
+    if (videosConfig.length === 1) {
+        thumbnailsContainer.style.display = 'none';
+        const video = videosConfig[0];
+        videoIframe.src = video.url;
+        videoIframe.title = video.title;
+        return;
+    }
+    
+    // Multiple videos: show thumbnails
+    thumbnailsContainer.style.display = 'flex';
+    thumbnailsContainer.innerHTML = videosConfig.map((video, index) => `
+        <div class="video-thumbnail ${index === 0 ? 'active' : ''}" data-video-id="${video.id || index}">
+            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+            <div class="video-thumbnail__title">${video.title}</div>
+        </div>
+    `).join('');
+    
+    // Initialize with first video
+    const firstVideo = videosConfig[0];
+    videoIframe.src = firstVideo.url;
+    videoIframe.title = firstVideo.title;
+    
+    // Add click handlers for thumbnails
+    thumbnailsContainer.addEventListener('click', (e) => {
+        const thumbnail = e.target.closest('.video-thumbnail');
+        if (!thumbnail) return;
+        
+        const videoId = thumbnail.getAttribute('data-video-id');
+        const selectedVideo = videosConfig.find(v => (v.id || videosConfig.indexOf(v).toString()) === videoId);
+        
+        if (selectedVideo) {
+            // Update active state
+            thumbnailsContainer.querySelectorAll('.video-thumbnail').forEach(thumb => 
+                thumb.classList.remove('active')
+            );
+            thumbnail.classList.add('active');
+            
+            // Switch video
+            videoIframe.src = selectedVideo.url;
+            videoIframe.title = selectedVideo.title;
+        }
+    });
+}
+
 function initializeCtaLinks(config) {
     document.querySelectorAll('.js-cta-link').forEach(link => {
         link.textContent = config.cta.label;
@@ -308,15 +367,7 @@ function initializePage(config) {
 
     new MetricsAnimator();
 
-    const videoSection = document.querySelector('.video-section');
-    if (config.video?.url) {
-        const videoIframe = videoSection.querySelector('iframe');
-        videoIframe.src = config.video.url;
-        videoIframe.title = config.video.title;
-        videoSection.style.display = 'block';
-    } else {
-        videoSection.style.display = 'none';
-    }
+    renderVideoSection(config);
 
     initializeCtaLinks(config);
     

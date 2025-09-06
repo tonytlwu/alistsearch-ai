@@ -35,9 +35,9 @@
 	<meta property="article:modified_time" content="2025-03-30T18:34:23+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 
-<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/base.css'>
-<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css'>
-<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css'>
+<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/base.css?v=1.2'>
+<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css?v=1.2'>
+<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css?v=1.2'>
 	<meta property="og:image" content="https://alistsearch.ai/wp-content/themes/alistsearch/assets/images/alist-og-logo.jpg" />
 </head>
 
@@ -82,40 +82,105 @@
       // Array of placement objects, each containing a logo and title
       placements: [
           {
-            logo: 'https://alistsearch.ai/wp-content/uploads/2025/03/duetti-300x157.jpg',
+            logo: './wp-content/uploads/2025/09/duetti-300x157.jpg',
             size: 1.5
           },
           {
-            logo: 'https://alistsearch.ai/wp-content/uploads/2015/07/Hinge.jpg',
+            logo: './wp-content/uploads/2025/09/Hinge.jpg',
             size: 1.5
           },
           {
-            logo: 'https://alistsearch.ai/wp-content/uploads/2018/10/newsela_featured_image.jpg',
+            logo: './wp-content/uploads/2025/09/newsela_featured_image.jpg',
             size: 2
           },
           {
-            logo: 'https://alistsearch.ai/wp-content/uploads/2018/07/tidal_featured_image.jpg',
+            logo: './wp-content/uploads/2025/09/Tidal-Logo-PNG-Pic.png',
             size: 1.5
           },
           {
-            logo: 'https://alistsearch.ai/wp-content/uploads/2025/01/4d090e12-7dd7-4a03-a99b-213e030a6030.jpg',
+            logo: './wp-content/uploads/2025/09/4d090e12-7dd7-4a03-a99b-213e030a6030.jpg',
             size: 1.5
           },
           {
-            logo: 'https://alistsearch.ai/wp-content/uploads/2024/10/Two_Boxes_Logo.jpg',
+            logo: './wp-content/uploads/2025/09/Two_Boxes_Logo.jpg',
             size: 1.3
+          },
+          {
+            logo: './wp-content/uploads/2025/09/bombas.png',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/comcast_featured_image.jpg',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/de-shaw.png',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/EverC-1024x535.jpg',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/freewheel_featured_image.jpg',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/gretel.png',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/ideon.png',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/Shazam_logo.png',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/lseg_logo_rgb_pos.jpg',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/medidata_featured_image.jpg',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/singlecare_featured_image.jpg',
+            size: 1.5
+          },
+          {
+            logo: './wp-content/uploads/2025/09/weworklogo-.png',
+            size: 1.5
           }
         ]
     },
 
     // Video section configuration
-    // Displays a featured video in an iframe
-    video: {
-      // YouTube embed URL (must be in format: https://www.youtube.com/embed/VIDEO_ID)
-      url: 'https://www.youtube.com/embed/71VnbMNBniI',
-      // Title attribute for the iframe (for accessibility)
-      title: 'Two Boxes - Client Spotlight'
-    },
+    // Displays featured videos with thumbnails for switching
+    videos: [
+      {
+        id: 'two-boxes',
+        // YouTube embed URL (must be in format: https://www.youtube.com/embed/VIDEO_ID)
+        url: 'https://www.youtube.com/embed/71VnbMNBniI',
+        // Title attribute for the iframe (for accessibility)
+        title: 'Two Boxes - Client Spotlight',
+        // Thumbnail image URL (YouTube thumbnail or custom image)
+        thumbnail: 'https://img.youtube.com/vi/71VnbMNBniI/maxresdefault.jpg'
+      },
+      {
+        id: 'sample-2',
+        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        title: 'Sample Video 2',
+        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg'
+      },
+      {
+        id: 'sample-3',
+        url: 'https://www.youtube.com/embed/jNQXAC9IVRw',
+        title: 'Sample Video 3',
+        thumbnail: 'https://img.youtube.com/vi/jNQXAC9IVRw/maxresdefault.jpg'
+      }
+    ],
 
     // Trust features section configuration
     // Highlights key selling points with icons and descriptions
@@ -270,6 +335,9 @@
   <!-- Video Section -->
   <section class="video-section">
     <div class="container">
+      <div class="video-thumbnails">
+        <!-- Video thumbnails will be populated by JavaScript -->
+      </div>
       <div class="video-wrapper">
         <iframe title="Company Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       </div>
@@ -327,6 +395,6 @@
 </footer>
 
 
-<script src="./wp-content/themes/alistsearch/assets/js/alt/landing-page/main.js"></script>
+<script src="./wp-content/themes/alistsearch/assets/js/alt/landing-page/main.js?v=1.2"></script>
 </body>
 </html>

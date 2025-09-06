@@ -174,7 +174,7 @@
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -1064,6 +1064,107 @@
   position: relative;
 }
 
+.video-thumbnails {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.video-thumbnail {
+  flex: 0 0 auto;
+  width: 120px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+  border: 2px solid transparent;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.video-thumbnail:hover {
+  border-color: var(--color-secondary);
+}
+
+.video-thumbnail.active {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 10px rgba(212, 165, 116, 0.4);
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 68px;
+  object-fit: cover;
+  transition: opacity var(--duration-normal) var(--ease-out);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.video-thumbnail:hover img {
+  opacity: 0.8;
+}
+
+.video-thumbnail__title {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 2.4em;
+}
+
+.video-thumbnail::after {
+  content: '';
+  position: absolute;
+  top: 34px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
+  transition: opacity var(--duration-normal) var(--ease-out);
+  
+  /* Play button triangle */
+  clip-path: polygon(35% 25%, 75% 50%, 35% 75%);
+}
+
+.video-thumbnail:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .video-thumbnail {
+    width: 100px;
+  }
+  
+  .video-thumbnail img {
+    height: 56px;
+  }
+  
+  .video-thumbnail::after {
+    top: 28px;
+  }
+  
+  .video-thumbnail__title {
+    font-size: 0.675rem;
+  }
+  
+  .video-thumbnails {
+    gap: 0.5rem;
+  }
+}
+
 .video-wrapper {
   position: relative;
   padding-bottom: 56.25%;
@@ -1076,10 +1177,6 @@
   transition: transform var(--duration-normal) var(--ease-out);
 }
 
-.video-wrapper:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-xl), 0 0 40px rgba(212, 165, 116, 0.2);
-}
 
 .video-wrapper iframe {
   position: absolute;
