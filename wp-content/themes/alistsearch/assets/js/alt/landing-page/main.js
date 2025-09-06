@@ -40,26 +40,56 @@ class MetricsAnimator {
 
     animateNumber(card) {
         const numberElement = card.querySelector('.metric-card__number');
-        const target = parseInt(numberElement.getAttribute('data-target')) || 0;
+        const targetValue = numberElement.getAttribute('data-target');
         const duration = 2000;
         const startTime = performance.now();
 
-        const updateNumber = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            const current = Math.floor(easeProgress * target);
+        // Check if it's a range (contains hyphen) or a single number
+        const isRange = targetValue.includes('-');
+        
+        if (isRange) {
+            const [minVal, maxVal] = targetValue.split('-').map(val => parseInt(val.trim()));
             
-            numberElement.textContent = current;
+            const updateNumber = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                
+                // Animate both numbers independently
+                const currentMin = Math.floor(easeProgress * minVal);
+                const currentMax = Math.floor(easeProgress * maxVal);
+                
+                numberElement.textContent = `${currentMin}-${currentMax}`;
 
-            if (progress < 1) {
-                requestAnimationFrame(updateNumber);
-            } else {
-                numberElement.textContent = target;
-            }
-        };
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    numberElement.textContent = targetValue;
+                }
+            };
 
-        requestAnimationFrame(updateNumber);
+            requestAnimationFrame(updateNumber);
+        } else {
+            // Original logic for single numbers
+            const target = parseInt(targetValue) || 0;
+            
+            const updateNumber = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeProgress * target);
+                
+                numberElement.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    numberElement.textContent = target;
+                }
+            };
+
+            requestAnimationFrame(updateNumber);
+        }
     }
 
     destroy() {
@@ -200,8 +230,10 @@ function renderMetrics(config) {
     metricsGrid.innerHTML = metricsData.map(metric => `
         <div class="metric-card" data-metric="${metric.id}">
             <div class="metric-card__label">${metric.label}</div>
-            <div class="metric-card__number" data-target="${metric.value}">0</div>
-            <div class="metric-card__unit">${metric.unit}</div>
+            <div class="metric-card__value">
+                <div class="metric-card__number" data-target="${metric.value}">0</div>
+                <div class="metric-card__unit">${metric.unit || '&nbsp;'}</div>
+            </div>
             <div class="metric-card__description">${metric.description}</div>
         </div>
     `).join('');
