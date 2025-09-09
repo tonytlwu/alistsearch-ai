@@ -219,6 +219,16 @@ function renderContent(config) {
     finalCta.querySelector('p').textContent = config.finalCta.description;
 }
 
+function getMetricIcon(iconName) {
+    const icons = {
+        target: '<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>',
+        zap: '<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"></polygon></svg>',
+        clock: '<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12,6 12,12 16,14"></polyline></svg>',
+        users: '<svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>'
+    };
+    return icons[iconName] || '';
+}
+
 function renderMetrics(config) {
     if (!config.metrics?.data) return;
 
@@ -229,6 +239,7 @@ function renderMetrics(config) {
     metricsGrid.setAttribute('data-count', metricsData.length);
     metricsGrid.innerHTML = metricsData.map(metric => `
         <div class="metric-card" data-metric="${metric.id}">
+            ${metric.icon ? `<div class="metric-card__icon">${getMetricIcon(metric.icon)}</div>` : ''}
             <div class="metric-card__label">${metric.label}</div>
             <div class="metric-card__value">
                 <div class="metric-card__number" data-target="${metric.value}">0</div>

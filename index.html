@@ -35,9 +35,9 @@
 	<meta property="article:modified_time" content="2025-03-30T18:34:23+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 
-<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/base.css?v=1.5'>
-<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css?v=1.5'>
-<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css?v=1.5'>
+<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/base.css?v=1.6'>
+<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css?v=1.6'>
+<link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css?v=1.6'>
 	<meta property="og:image" content="https://alistsearch.ai/wp-content/themes/alistsearch/assets/images/alist-og-logo.jpg" />
 </head>
 
@@ -159,14 +159,26 @@
     // Video section configuration
     // Displays featured videos with thumbnails for switching
     videos: [
-      {
+    {
         id: 'two-boxes',
         // YouTube embed URL (must be in format: https://www.youtube.com/embed/VIDEO_ID)
         url: 'https://www.youtube.com/embed/71VnbMNBniI',
         // Title attribute for the iframe (for accessibility)
-        title: 'Two Boxes - Client Spotlight',
+        title: 'Evan Stalter - Two Boxes (Cofounder/CPO)',
         // Thumbnail image URL (YouTube thumbnail or custom image)
         thumbnail: 'https://img.youtube.com/vi/71VnbMNBniI/maxresdefault.jpg'
+      },
+      {
+        id: 'elovee',
+        url: 'https://www.youtube.com/embed/Jb3CXJAdaWk',
+        title: 'Paul Campbell  - Elovee (CEO)',
+        thumbnail: 'https://img.youtube.com/vi/Jb3CXJAdaWk/maxresdefault.jpg'
+      },
+      {
+        id: 'newsela',
+        url: 'https://www.youtube.com/embed/9zD0SzvUmqk',
+        title: 'Eric Bacolas - Newsela (Chief People Officer)',
+        thumbnail: 'https://img.youtube.com/vi/9zD0SzvUmqk/maxresdefault.jpg'
       }
     ],
 
@@ -226,28 +238,32 @@
           value: 98,
           unit: '%',
           label: 'Accuracy',
-          description: 'of candidates presented are interviewed'
+          description: 'of candidates presented are interviewed',
+          icon: 'target'
         },
         {
           id: 'speed',
           value: '3-5',
           unit: '',
           label: 'Speed',
-          description: 'qualified candidates within the first 2 weeks'
+          description: 'qualified candidates within the first 2 weeks',
+          icon: 'zap'
         },
         {
           id: 'time-to-close',
           value: 4,
           unit: 'weeks',
           label: 'Time to Close',
-          description: 'average time to close'
+          description: 'average time to close',
+          icon: 'clock'
         },
         {
           id: 'retention',
           value: 94,
           unit: '%',
           label: 'Retention',
-          description: 'still in seat after 24 months'
+          description: 'still in seat after 24 months',
+          icon: 'users'
         }
       ]
     },
@@ -323,11 +339,11 @@
   <!-- Video Section -->
   <section class="video-section">
     <div class="container">
+      <div class="video-wrapper">
+        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      </div>
       <div class="video-thumbnails">
         <!-- Video thumbnails will be populated by JavaScript -->
-      </div>
-      <div class="video-wrapper">
-        <iframe title="Company Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       </div>
     </div>
   </section>
@@ -383,6 +399,6 @@
 </footer>
 
 
-<script src="./wp-content/themes/alistsearch/assets/js/alt/landing-page/main.js?v=1.5"></script>
+<script src="./wp-content/themes/alistsearch/assets/js/alt/landing-page/main.js?v=1.6"></script>
 </body>
 </html>

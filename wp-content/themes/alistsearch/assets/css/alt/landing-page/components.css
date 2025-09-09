@@ -174,7 +174,7 @@
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -201,7 +201,7 @@
   max-width: 1200px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 480px) {
   .metrics-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -212,11 +212,17 @@
   }
 
   .metrics-grid[data-count="3"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .metrics-grid[data-count="3"] {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 800px) {
   .metrics-grid[data-count="2"] {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -250,7 +256,7 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-lg);
   padding: 2rem 1.5rem;
-  text-align: left;
+  text-align: center;
   transition: all var(--duration-normal) var(--ease-out);
   position: relative;
   overflow: hidden;
@@ -285,6 +291,31 @@
 
 .metric-card:hover::before {
   opacity: 1;
+}
+
+.metric-card__icon {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  opacity: 0.8;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.metric-card__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.5;
+  color: var(--color-secondary);
+  filter: drop-shadow(0 2px 4px rgba(212, 165, 116, 0.3));
+}
+
+.metric-card:hover .metric-card__icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.metric-card:hover .metric-card__icon svg {
+  filter: drop-shadow(0 4px 8px rgba(212, 165, 116, 0.4));
 }
 
 .metric-card__number {
@@ -343,11 +374,17 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 30px;
   height: 2px;
   background: var(--gradient-secondary);
   border-radius: 1px;
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.metric-card:hover .metric-card__label::after {
+  width: 50px;
 }
 
 
@@ -1028,14 +1065,14 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
   overflow-x: auto;
   padding: 1rem;
 }
 
 .video-thumbnail {
   flex: 0 0 auto;
-  width: 120px;
+  width: 160px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--duration-normal) var(--ease-out);
@@ -1057,7 +1094,7 @@
 
 .video-thumbnail img {
   width: 100%;
-  height: 68px;
+  height: 90px;
   object-fit: cover;
   transition: opacity var(--duration-normal) var(--ease-out);
   border-radius: var(--radius-sm);
@@ -1085,7 +1122,7 @@
 .video-thumbnail::after {
   content: '';
   position: absolute;
-  top: 34px;
+  top: 45px;
   left: 50%;
   width: 16px;
   height: 16px;
@@ -1105,15 +1142,15 @@
 
 @media (max-width: 640px) {
   .video-thumbnail {
-    width: 100px;
+    width: 130px;
   }
 
   .video-thumbnail img {
-    height: 56px;
+    height: 73px;
   }
 
   .video-thumbnail::after {
-    top: 28px;
+    top: 36px;
   }
 
   .video-thumbnail__title {
