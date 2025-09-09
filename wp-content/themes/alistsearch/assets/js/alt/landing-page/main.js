@@ -250,6 +250,16 @@ function renderMetrics(config) {
     `).join('');
 }
 
+function addAutoplayToYouTubeUrl(url, autoplay = false) {
+    if (!url.includes('youtube.com/embed/')) return url;
+    
+    const urlObj = new URL(url);
+    if (autoplay) {
+        urlObj.searchParams.set('autoplay', '1');
+    }
+    return urlObj.toString();
+}
+
 function renderVideoSection(config) {
     const videoSection = document.querySelector('.video-section');
     const videosConfig = config.videos || (config.video ? [config.video] : []);
@@ -302,8 +312,8 @@ function renderVideoSection(config) {
             );
             thumbnail.classList.add('active');
             
-            // Switch video
-            videoIframe.src = selectedVideo.url;
+            // Switch video with autoplay
+            videoIframe.src = addAutoplayToYouTubeUrl(selectedVideo.url, true);
             videoIframe.title = selectedVideo.title;
         }
     });
