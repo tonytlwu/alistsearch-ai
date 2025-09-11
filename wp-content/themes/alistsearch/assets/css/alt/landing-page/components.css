@@ -429,6 +429,11 @@
   transition: transform var(--duration-normal) var(--ease-out);
 }
 
+.scroll-indicator__arrow svg {
+  width: 36px;
+  height: 36px;
+}
+
 .scroll-indicator:hover .scroll-indicator__arrow {
   transform: scale(1.2);
   animation-duration: 1s;
