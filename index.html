@@ -49,6 +49,337 @@
 <link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/layout.css?v=1.7'>
 <link rel='stylesheet' href='./wp-content/themes/alistsearch/assets/css/alt/landing-page/components.css?v=1.7'>
 	<meta property="og:image" content="https://alistsearch.ai/wp-content/themes/alistsearch/assets/images/alist-og-logo.jpg" />
+
+<style>
+  .how-we-work {
+    background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
+    padding: 96px 0;
+  }
+
+  @media screen and (max-width: 1199px) {
+    .how-we-work {
+      padding: 64px 0;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work {
+      padding: 48px 0;
+    }
+  }
+
+  .how-we-work .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .how-we-work__intro {
+    max-width: 720px;
+    margin: 0 auto 48px;
+    text-align: center;
+    color: #0f172a;
+  }
+
+  .how-we-work__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 600;
+    color: #4c3fff;
+    margin-bottom: 12px;
+  }
+
+  .how-we-work__heading {
+    font-size: 36px;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work__heading {
+      font-size: 28px;
+    }
+  }
+
+  .how-we-work__subheading {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    color: #475569;
+  }
+
+  .how-we-work__tabs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .how-we-work__tabs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work__tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding-bottom: 8px;
+      margin-bottom: 32px;
+      scroll-snap-type: x proximity;
+    }
+
+    .how-we-work__tabs::-webkit-scrollbar {
+      height: 6px;
+    }
+  }
+
+  .how-we-work__tab {
+    position: relative;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 64px;
+    scroll-snap-align: center;
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work__tab {
+      padding: 12px 16px;
+      min-height: 56px;
+      flex: 0 0 auto;
+    }
+  }
+
+  .how-we-work__tab-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .how-we-work__tab svg {
+    width: 24px;
+    height: 24px;
+    color: #64748b;
+    transition: color 200ms ease;
+  }
+
+  .how-we-work__tab:focus-visible {
+    outline: 2px solid #4c3fff;
+    outline-offset: 2px;
+  }
+
+  .how-we-work__tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  }
+
+  .how-we-work__tab[aria-selected="true"] {
+    background: linear-gradient(135deg, #4c3fff, #38b2ac);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 20px 32px rgba(76, 63, 255, 0.25);
+  }
+
+  .how-we-work__tab[aria-selected="true"] svg {
+    color: #ffffff;
+  }
+
+  .how-we-work__tab[aria-selected="true"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    box-shadow: inset 0 3px 0 rgba(255, 255, 255, 0.35);
+    opacity: 0.6;
+  }
+
+  .how-we-work__tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    transition: background 200ms ease;
+  }
+
+  .how-we-work__tab[aria-selected="true"]::after {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .how-we-work__panel {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.08);
+  }
+
+  @media screen and (max-width: 991px) {
+    .how-we-work__panel {
+      padding: 32px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work__panel {
+      padding: 24px;
+    }
+  }
+
+  .how-we-work__content {
+    display: flex;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .how-we-work__content {
+      gap: 24px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work__content {
+      flex-direction: column;
+    }
+  }
+
+  .how-we-work__text {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transform: translateY(0);
+    opacity: 1;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .how-we-work__text.is-transitioning {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .how-we-work__chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(76, 63, 255, 0.1);
+    color: #4c3fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .how-we-work__headline {
+    font-size: 24px;
+    line-height: 1.4;
+    font-weight: 700;
+    margin: 0;
+    color: #0f172a;
+  }
+
+  .how-we-work__body {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    color: #334155;
+  }
+
+  .how-we-work__bullets {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #334155;
+  }
+
+  .how-we-work__bullets[hidden] {
+    display: none;
+  }
+
+  .how-we-work__image-wrapper {
+    flex: 1 1 40%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
+    opacity: 1;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+
+  .how-we-work__image-wrapper.is-transitioning {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .how-we-work__image-frame {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px rgba(76, 63, 255, 0.1);
+    background: linear-gradient(135deg, rgba(76, 63, 255, 0.1), rgba(56, 178, 172, 0.1));
+  }
+
+  .how-we-work__image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 1199px) {
+    .how-we-work__text {
+      flex-basis: 55%;
+    }
+
+    .how-we-work__image-wrapper {
+      flex-basis: 45%;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .how-we-work__image-frame {
+      max-width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .how-we-work__tab,
+    .how-we-work__text,
+    .how-we-work__image-wrapper {
+      transition: none;
+    }
+  }
+</style>
 </head>
 
 <body class="page-template page-template-alt-page-landing page-template-alt-page-landing-php page page-id-17769">
@@ -299,6 +630,218 @@
   };
 </script>
 
+<script>
+  (function() {
+    const steps = [
+      {
+        id: 'discovery-launch',
+        chip: 'Step 1 · Discovery Launch',
+        headline: 'Align on the role, the story, and the search strategy',
+        body: 'We start with an intensive intake to clarify success profiles, hiring timelines, and stakeholder priorities. Together we craft the hiring narrative, clarify target candidate pools, and outline the outreach plan so the search is set up to move quickly.',
+        bullets: [
+          'Define role scorecard and alignment checkpoints',
+          'Confirm timeline, compensation bands, and decision workflow'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Executive team and recruiter collaborating on hiring plan during discovery kickoff.'
+        }
+      },
+      {
+        id: 'source-qualify',
+        chip: 'Step 2 · Source Qualify',
+        headline: 'Surface best-fit talent and keep them engaged',
+        body: 'We activate curated outreach across our network and present a narrow slate of qualified candidates in the first two weeks. Every profile includes calibrated notes, alignment to must-have experience, and real-time feedback loops so you stay ahead of the market.',
+        bullets: [
+          'Weekly pipeline intelligence with actionable next steps',
+          'Candidate experience tailored to your brand voice'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Recruiter reviewing qualified candidate profiles on a digital dashboard.'
+        }
+      },
+      {
+        id: 'offer-signed',
+        chip: 'Step 3 · Offer Signed',
+        headline: 'Close top candidates with clarity and momentum',
+        body: 'We partner with you on compensation strategy, expectation setting, and stakeholder alignment to secure a yes. From interview debriefs to reference checks and offer delivery, we manage the details so candidates feel supported and confident in their decision.',
+        bullets: [
+          'Structured debriefs to surface aligned decisions quickly',
+          'Offer negotiation guidance grounded in current market data'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Candidate signing an offer on a tablet while recruiter congratulates via video call.'
+        }
+      },
+      {
+        id: 'delivery-review',
+        chip: 'Step 4 · Delivery Review',
+        headline: 'Reflect, optimize, and prepare for long-term success',
+        body: 'After placement, we host a delivery review to capture lessons learned, hand off onboarding insights, and refine the partnership playbook. Our goal is to ensure a smooth transition for your new hire and set the stage for future searches.',
+        bullets: [
+          'Onboarding readiness checklist tailored to the role',
+          'Data-backed recommendations for continuous improvement'
+        ],
+        image: {
+          src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
+          alt: 'Leadership team reviewing dashboards and feedback during delivery review session.'
+        }
+      }
+    ];
+
+    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const transitionDuration = reduceMotionQuery.matches ? 0 : 160;
+
+    const initializeTabs = () => {
+      const tabList = document.querySelector('.how-we-work__tabs');
+      const tabs = Array.from(tabList ? tabList.querySelectorAll('[role="tab"]') : []);
+      const panel = document.getElementById('how-we-work-panel');
+
+      if (!tabList || tabs.length === 0 || !panel) {
+        return;
+      }
+
+      const textContainer = panel.querySelector('[data-content="text"]');
+      const imageContainer = panel.querySelector('[data-content="image"]');
+      const chipEl = panel.querySelector('[data-field="chip"]');
+      const headlineEl = panel.querySelector('[data-field="headline"]');
+      const bodyEl = panel.querySelector('[data-field="body"]');
+      const bulletsEl = panel.querySelector('[data-field="bullets"]');
+      const imageEl = panel.querySelector('[data-field="image"]');
+
+      if (!textContainer || !imageContainer || !chipEl || !headlineEl || !bodyEl || !bulletsEl || !imageEl) {
+        return;
+      }
+
+      let activeIndex = -1;
+
+      const updatePanelContent = (step, index) => {
+        const applyContent = () => {
+          chipEl.textContent = step.chip;
+          headlineEl.textContent = step.headline;
+          bodyEl.textContent = step.body;
+
+          bulletsEl.innerHTML = '';
+          if (step.bullets && step.bullets.length > 0) {
+            step.bullets.forEach((item) => {
+              const listItem = document.createElement('li');
+              listItem.textContent = item;
+              bulletsEl.appendChild(listItem);
+            });
+            bulletsEl.hidden = false;
+          } else {
+            bulletsEl.hidden = true;
+          }
+
+          imageEl.setAttribute('src', step.image.src);
+          imageEl.setAttribute('alt', step.image.alt);
+          panel.setAttribute('aria-labelledby', `how-we-work-tab-${index}`);
+        };
+
+        if (transitionDuration === 0) {
+          applyContent();
+          return;
+        }
+
+        textContainer.classList.add('is-transitioning');
+        imageContainer.classList.add('is-transitioning');
+
+        window.setTimeout(() => {
+          applyContent();
+          textContainer.classList.remove('is-transitioning');
+          imageContainer.classList.remove('is-transitioning');
+        }, transitionDuration);
+      };
+
+      const setActiveTab = (index, options = {}) => {
+        const { shouldFocus = false, force = false } = options;
+
+        if (index < 0 || index >= tabs.length) {
+          return;
+        }
+
+        if (index === activeIndex && !force) {
+          if (shouldFocus) {
+            tabs[index].focus();
+          }
+          return;
+        }
+
+        activeIndex = index;
+
+        tabs.forEach((tab, tabIndex) => {
+          const isActive = tabIndex === index;
+          tab.setAttribute('aria-selected', String(isActive));
+          tab.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+
+        updatePanelContent(steps[index], index);
+
+        if (shouldFocus) {
+          tabs[index].focus();
+        }
+      };
+
+      const handleKeyDown = (event) => {
+        const { key } = event;
+
+        if (key !== 'ArrowRight' && key !== 'ArrowLeft' && key !== 'ArrowUp' && key !== 'ArrowDown' && key !== 'Home' && key !== 'End' && key !== 'Enter' && key !== ' ') {
+          return;
+        }
+
+        const totalTabs = tabs.length;
+        let targetIndex = activeIndex;
+
+        switch (key) {
+          case 'ArrowRight':
+          case 'ArrowDown':
+            targetIndex = (activeIndex + 1 + totalTabs) % totalTabs;
+            event.preventDefault();
+            break;
+          case 'ArrowLeft':
+          case 'ArrowUp':
+            targetIndex = (activeIndex - 1 + totalTabs) % totalTabs;
+            event.preventDefault();
+            break;
+          case 'Home':
+            targetIndex = 0;
+            event.preventDefault();
+            break;
+          case 'End':
+            targetIndex = totalTabs - 1;
+            event.preventDefault();
+            break;
+          case 'Enter':
+          case ' ': {
+            event.preventDefault();
+            setActiveTab(activeIndex, { shouldFocus: true, force: true });
+            return;
+          }
+          default:
+            break;
+        }
+
+        setActiveTab(targetIndex, { shouldFocus: true });
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => setActiveTab(index, { shouldFocus: true }));
+        tab.addEventListener('keydown', handleKeyDown);
+      });
+
+      setActiveTab(0, { force: true });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeTabs);
+    } else {
+      initializeTabs();
+    }
+  })();
+</script>
+
 <!-- Header -->
 <div id="header">
   <div class="container">
@@ -338,6 +881,75 @@
             <path d="M7 13L12 18L17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M7 6L12 11L17 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-we-work" aria-labelledby="how-we-work-heading">
+    <div class="container">
+      <div class="how-we-work__intro">
+        <p class="how-we-work__eyebrow">How we work</p>
+        <h2 id="how-we-work-heading" class="how-we-work__heading">A-List Search partners with you every step</h2>
+        <p class="how-we-work__subheading">Our proven four-step framework keeps your hiring search focused, collaborative, and on pace from kickoff to final review.</p>
+      </div>
+
+      <div class="how-we-work__tabs" role="tablist" aria-label="How we work steps">
+        <button class="how-we-work__tab" id="how-we-work-tab-0" role="tab" aria-selected="true" aria-controls="how-we-work-panel" data-step="0">
+          <span class="how-we-work__tab-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span>Discovery Launch</span>
+        </button>
+        <button class="how-we-work__tab" id="how-we-work-tab-1" role="tab" aria-selected="false" tabindex="-1" aria-controls="how-we-work-panel" data-step="1">
+          <span class="how-we-work__tab-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 5H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              <path d="M5 5L7 20L12 18L17 20L19 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M10 9H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <span>Source Qualify</span>
+        </button>
+        <button class="how-we-work__tab" id="how-we-work-tab-2" role="tab" aria-selected="false" tabindex="-1" aria-controls="how-we-work-panel" data-step="2">
+          <span class="how-we-work__tab-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 3H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              <path d="M5 6H19V18C19 19.1046 18.1046 20 17 20H7C5.89543 20 5 19.1046 5 18V6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+              <path d="M9 11L11 13L15 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span>Offer Signed</span>
+        </button>
+        <button class="how-we-work__tab" id="how-we-work-tab-3" role="tab" aria-selected="false" tabindex="-1" aria-controls="how-we-work-panel" data-step="3">
+          <span class="how-we-work__tab-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 19H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+              <path d="M6 19V7L14 5V19" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+              <path d="M18 14C16.3431 14 15 12.6569 15 11C15 9.34315 16.3431 8 18 8C19.6569 8 21 9.34315 21 11C21 12.6569 19.6569 14 18 14Z" stroke="currentColor" stroke-width="1.5"></path>
+              <path d="M17 11H18.2V9.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <span>Delivery Review</span>
+        </button>
+      </div>
+
+      <div class="how-we-work__panel">
+        <div id="how-we-work-panel" class="how-we-work__content" role="tabpanel" aria-labelledby="how-we-work-tab-0">
+          <div class="how-we-work__text" data-content="text">
+            <span class="how-we-work__chip" data-field="chip"></span>
+            <h3 class="how-we-work__headline" data-field="headline"></h3>
+            <p class="how-we-work__body" data-field="body"></p>
+            <ul class="how-we-work__bullets" data-field="bullets" hidden></ul>
+          </div>
+          <div class="how-we-work__image-wrapper" data-content="image">
+            <div class="how-we-work__image-frame">
+              <img data-field="image" alt="" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
