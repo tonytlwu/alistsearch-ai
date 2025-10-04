@@ -29,7 +29,7 @@ class MetricsAnimator {
     animateMetrics() {
         this.metricsSection.classList.add('animate');
         const cards = this.metricsSection.querySelectorAll('.metric-card');
-        
+
         cards.forEach((card, index) => {
             setTimeout(() => {
                 card.classList.add('animate-in');
@@ -46,19 +46,19 @@ class MetricsAnimator {
 
         // Check if it's a range (contains hyphen) or a single number
         const isRange = targetValue.includes('-');
-        
+
         if (isRange) {
             const [minVal, maxVal] = targetValue.split('-').map(val => parseInt(val.trim()));
-            
+
             const updateNumber = (currentTime) => {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
-                
+
                 // Animate both numbers independently
                 const currentMin = Math.floor(easeProgress * minVal);
                 const currentMax = Math.floor(easeProgress * maxVal);
-                
+
                 numberElement.textContent = `${currentMin}-${currentMax}`;
 
                 if (progress < 1) {
@@ -72,13 +72,13 @@ class MetricsAnimator {
         } else {
             // Original logic for single numbers
             const target = parseInt(targetValue) || 0;
-            
+
             const updateNumber = (currentTime) => {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
                 const current = Math.floor(easeProgress * target);
-                
+
                 numberElement.textContent = current;
 
                 if (progress < 1) {
@@ -111,7 +111,7 @@ class RoleTyper {
         const role = this.roles[this.currentRole];
         const typingSpeed = this.isDeleting ? 50 : 100;
 
-        this.currentText = this.isDeleting 
+        this.currentText = this.isDeleting
             ? role.substring(0, this.currentText.length - 1)
             : role.substring(0, this.currentText.length + 1);
 
@@ -168,7 +168,7 @@ class InfiniteCarousel {
     setupInfiniteLoop() {
         const itemWidth = 284;
         const totalWidth = this.items.length * itemWidth;
-        
+
         const style = document.createElement('style');
         style.textContent = `
             @keyframes infiniteScroll {
@@ -213,7 +213,7 @@ function renderTestimonial(config) {
 
 function renderContent(config) {
     document.querySelector('.hero__description').textContent = config.hero.description;
-    
+
     const finalCta = document.querySelector('.final-cta');
     finalCta.querySelector('h2').textContent = config.finalCta.title;
     finalCta.querySelector('p').textContent = config.finalCta.description;
@@ -252,7 +252,7 @@ function renderMetrics(config) {
 
 function addAutoplayToYouTubeUrl(url, autoplay = false) {
     if (!url.includes('youtube.com/embed/')) return url;
-    
+
     const urlObj = new URL(url);
     if (autoplay) {
         urlObj.searchParams.set('autoplay', '1');
@@ -263,17 +263,17 @@ function addAutoplayToYouTubeUrl(url, autoplay = false) {
 function renderVideoSection(config) {
     const videoSection = document.querySelector('.video-section');
     const videosConfig = config.videos || (config.video ? [config.video] : []);
-    
+
     if (!videosConfig.length) {
         videoSection.style.display = 'none';
         return;
     }
-    
+
     videoSection.style.display = 'block';
-    
+
     const thumbnailsContainer = videoSection.querySelector('.video-thumbnails');
     const videoIframe = videoSection.querySelector('iframe');
-    
+
     // If only one video, hide thumbnails and show video directly
     if (videosConfig.length === 1) {
         thumbnailsContainer.style.display = 'none';
@@ -282,7 +282,7 @@ function renderVideoSection(config) {
         videoIframe.title = video.title;
         return;
     }
-    
+
     // Multiple videos: show thumbnails
     thumbnailsContainer.style.display = 'flex';
     thumbnailsContainer.innerHTML = videosConfig.map((video, index) => `
@@ -291,27 +291,27 @@ function renderVideoSection(config) {
             <div class="video-thumbnail__title">${video.title}</div>
         </div>
     `).join('');
-    
+
     // Initialize with first video
     const firstVideo = videosConfig[0];
     videoIframe.src = firstVideo.url;
     videoIframe.title = firstVideo.title;
-    
+
     // Add click handlers for thumbnails
     thumbnailsContainer.addEventListener('click', (e) => {
         const thumbnail = e.target.closest('.video-thumbnail');
         if (!thumbnail) return;
-        
+
         const videoId = thumbnail.getAttribute('data-video-id');
         const selectedVideo = videosConfig.find(v => (v.id || videosConfig.indexOf(v).toString()) === videoId);
-        
+
         if (selectedVideo) {
             // Update active state
-            thumbnailsContainer.querySelectorAll('.video-thumbnail').forEach(thumb => 
+            thumbnailsContainer.querySelectorAll('.video-thumbnail').forEach(thumb =>
                 thumb.classList.remove('active')
             );
             thumbnail.classList.add('active');
-            
+
             // Switch video with autoplay
             videoIframe.src = addAutoplayToYouTubeUrl(selectedVideo.url, true);
             videoIframe.title = selectedVideo.title;
@@ -337,7 +337,7 @@ class ScrollController {
     init() {
         this.setupScrollIndicator();
         this.setupRevealAnimations();
-        
+
         window.addEventListener('scroll', () => {
             if (!this.ticking) {
                 requestAnimationFrame(() => {
@@ -352,11 +352,11 @@ class ScrollController {
     setupScrollIndicator() {
         const indicator = document.querySelector('.scroll-indicator');
         const hero = document.querySelector('.hero');
-        
+
         if (!indicator || !hero) return;
 
         indicator.addEventListener('click', () => {
-            document.querySelector('.credibility')?.scrollIntoView({ 
+            document.querySelector('.credibility')?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
@@ -381,12 +381,12 @@ class ScrollController {
     updateScrollIndicator() {
         const indicator = document.querySelector('.scroll-indicator');
         const hero = document.querySelector('.hero');
-        
+
         if (!indicator || !hero) return;
 
         const heroRect = hero.getBoundingClientRect();
         const isHidden = heroRect.bottom < window.innerHeight * 0.3;
-        
+
         indicator.style.opacity = isHidden ? '0' : '';
         indicator.style.pointerEvents = isHidden ? 'none' : '';
     }
@@ -422,8 +422,10 @@ function initializePage(config) {
     renderVideoSection(config);
 
     initializeCtaLinks(config);
-    
+
     setTimeout(() => new ScrollController(), 100);
+
+    initializeHowWeWorkSection(config);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -431,3 +433,161 @@ document.addEventListener('DOMContentLoaded', () => {
         initializePage(window.pageConfig);
     }
 });
+
+function initializeHowWeWorkSection(config) {
+    const { howWeWork } = config;
+    const tabList = document.querySelector('.how-we-work__tabs');
+    const panel = document.getElementById('how-we-work-panel');
+
+    if (!tabList || !panel || !howWeWork || !Array.isArray(howWeWork.steps)) {
+        return;
+    }
+
+    const steps = howWeWork.steps;
+    if (steps.length === 0) {
+        return;
+    }
+
+    const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+    const textContainer = panel.querySelector('[data-content="text"]');
+    const imageContainer = panel.querySelector('[data-content="image"]');
+    const chipEl = panel.querySelector('[data-field="chip"]');
+    const headlineEl = panel.querySelector('[data-field="headline"]');
+    const bodyEl = panel.querySelector('[data-field="body"]');
+    const bulletsEl = panel.querySelector('[data-field="bullets"]');
+    const imageEl = panel.querySelector('[data-field="image"]');
+
+    if (!tabs.length || !textContainer || !imageContainer || !chipEl || !headlineEl || !bodyEl || !bulletsEl || !imageEl) {
+        return;
+    }
+
+    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const transitionDuration = reduceMotionQuery.matches ? 0 : 160;
+    let activeIndex = -1;
+
+    const updatePanelContent = (step, index) => {
+        if (!step) {
+            return;
+        }
+
+        const applyContent = () => {
+            chipEl.textContent = step.chip;
+            headlineEl.textContent = step.headline;
+            bodyEl.textContent = step.body;
+
+            bulletsEl.innerHTML = '';
+            const hasBullets = Array.isArray(step.bullets) && step.bullets.length > 0;
+            if (hasBullets) {
+                step.bullets.forEach((item) => {
+                    if (typeof item === 'string' && item.trim().length > 0) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = item;
+                        bulletsEl.appendChild(listItem);
+                    }
+                });
+                bulletsEl.hidden = false;
+            } else {
+                bulletsEl.hidden = true;
+            }
+
+            const imageSrc = step.image?.src ?? '';
+            const imageAlt = step.image?.alt ?? '';
+            imageEl.setAttribute('src', imageSrc);
+            imageEl.setAttribute('alt', imageAlt);
+            panel.setAttribute('aria-labelledby', `how-we-work-tab-${index}`);
+        };
+
+        if (transitionDuration === 0) {
+            applyContent();
+            return;
+        }
+
+        textContainer.classList.add('is-transitioning');
+        imageContainer.classList.add('is-transitioning');
+
+        window.setTimeout(() => {
+            applyContent();
+            textContainer.classList.remove('is-transitioning');
+            imageContainer.classList.remove('is-transitioning');
+        }, transitionDuration);
+    };
+
+    const setActiveTab = (index, options = {}) => {
+        const { shouldFocus = false, force = false } = options;
+
+        if (index < 0 || index >= tabs.length) {
+            return;
+        }
+
+        if (index === activeIndex && !force) {
+            if (shouldFocus) {
+                tabs[index].focus();
+            }
+            return;
+        }
+
+        activeIndex = index;
+
+        tabs.forEach((tab, tabIndex) => {
+            const isActive = tabIndex === index;
+            tab.setAttribute('aria-selected', String(isActive));
+            tab.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+
+        updatePanelContent(steps[index], index);
+
+        if (shouldFocus) {
+            tabs[index].focus();
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        const { key } = event;
+
+        const navigationKeys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
+        if (!navigationKeys.includes(key)) {
+            return;
+        }
+
+        const totalTabs = tabs.length;
+        let targetIndex = activeIndex;
+
+        switch (key) {
+            case 'ArrowRight':
+            case 'ArrowDown':
+                targetIndex = (activeIndex + 1 + totalTabs) % totalTabs;
+                event.preventDefault();
+                break;
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                targetIndex = (activeIndex - 1 + totalTabs) % totalTabs;
+                event.preventDefault();
+                break;
+            case 'Home':
+                targetIndex = 0;
+                event.preventDefault();
+                break;
+            case 'End':
+                targetIndex = totalTabs - 1;
+                event.preventDefault();
+                break;
+            case 'Enter':
+            case ' ': {
+                event.preventDefault();
+                setActiveTab(activeIndex, { shouldFocus: true, force: true });
+                return;
+            }
+            default:
+                break;
+        }
+
+        setActiveTab(targetIndex, { shouldFocus: true });
+    };
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => setActiveTab(index, { shouldFocus: true }));
+        tab.addEventListener('keydown', handleKeyDown);
+    });
+
+    setActiveTab(0, { force: true });
+}
