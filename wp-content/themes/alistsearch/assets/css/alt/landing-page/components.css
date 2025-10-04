@@ -265,6 +265,7 @@
   color: var(--color-primary-text);
   border-color: transparent;
   box-shadow: 0 20px 36px rgba(45, 53, 97, 0.28);
+  border-top-color: var(--color-secondary);
 }
 
 .how-we-work__tab[aria-selected="true"] svg {
