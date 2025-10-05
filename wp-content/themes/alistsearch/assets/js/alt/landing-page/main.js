@@ -435,159 +435,174 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeHowWeWorkSection(config) {
-    const { howWeWork } = config;
-    const tabList = document.querySelector('.how-we-work__tabs');
-    const panel = document.getElementById('how-we-work-panel');
+    const container = document.querySelector('.how-we-work');
+    const tabList = container?.querySelector('.how-we-work__tabs');
+    const panelsContainer = container?.querySelector('.how-we-work__panels');
+    const introEyebrow = container?.querySelector('.how-we-work__eyebrow');
+    const introHeading = container?.querySelector('.how-we-work__heading');
+    const introSubheading = container?.querySelector('.how-we-work__subheading');
+    const howWeWorkConfig = config.howWeWork;
 
-    if (!tabList || !panel || !howWeWork || !Array.isArray(howWeWork.steps)) {
+    if (!container || !tabList || !panelsContainer || !howWeWorkConfig || !Array.isArray(howWeWorkConfig.steps) || howWeWorkConfig.steps.length === 0) {
         return;
     }
 
-    const steps = howWeWork.steps;
-    if (steps.length === 0) {
-        return;
+    if (introEyebrow) {
+        introEyebrow.textContent = howWeWorkConfig.eyebrow ?? introEyebrow.textContent ?? '';
     }
 
-    const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
-    const textContainer = panel.querySelector('[data-content="text"]');
-    const imageContainer = panel.querySelector('[data-content="image"]');
-    const chipEl = panel.querySelector('[data-field="chip"]');
-    const headlineEl = panel.querySelector('[data-field="headline"]');
-    const bodyEl = panel.querySelector('[data-field="body"]');
-    const bulletsEl = panel.querySelector('[data-field="bullets"]');
-    const imageEl = panel.querySelector('[data-field="image"]');
-
-    if (!tabs.length || !textContainer || !imageContainer || !chipEl || !headlineEl || !bodyEl || !bulletsEl || !imageEl) {
-        return;
+    if (introHeading) {
+        introHeading.textContent = howWeWorkConfig.heading ?? introHeading.textContent ?? '';
     }
 
-    const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const transitionDuration = reduceMotionQuery.matches ? 0 : 160;
-    let activeIndex = -1;
+    if (introSubheading) {
+        introSubheading.textContent = howWeWorkConfig.subheading ?? introSubheading.textContent ?? '';
+    }
 
-    const updatePanelContent = (step, index) => {
-        if (!step) {
-            return;
+    tabList.innerHTML = '';
+    panelsContainer.innerHTML = '';
+
+    const steps = howWeWorkConfig.steps;
+
+    const deriveLabel = (step, index) => {
+        if (typeof step.tabLabel === 'string' && step.tabLabel.trim().length > 0) {
+            return step.tabLabel.trim();
         }
 
-        const applyContent = () => {
-            chipEl.textContent = step.chip;
-            headlineEl.textContent = step.headline;
-            bodyEl.textContent = step.body;
-
-            bulletsEl.innerHTML = '';
-            const hasBullets = Array.isArray(step.bullets) && step.bullets.length > 0;
-            if (hasBullets) {
-                step.bullets.forEach((item) => {
-                    if (typeof item === 'string' && item.trim().length > 0) {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = item;
-                        bulletsEl.appendChild(listItem);
-                    }
-                });
-                bulletsEl.hidden = false;
-            } else {
-                bulletsEl.hidden = true;
+        if (typeof step.chip === 'string') {
+            const chipParts = step.chip.split('·');
+            if (chipParts.length > 1) {
+                return chipParts[1].trim();
             }
-
-            const imageSrc = step.image?.src ?? '';
-            const imageAlt = step.image?.alt ?? '';
-            imageEl.setAttribute('src', imageSrc);
-            imageEl.setAttribute('alt', imageAlt);
-            panel.setAttribute('aria-labelledby', `how-we-work-tab-${index}`);
-        };
-
-        if (transitionDuration === 0) {
-            applyContent();
-            return;
+            return step.chip.trim();
         }
 
-        textContainer.classList.add('is-transitioning');
-        imageContainer.classList.add('is-transitioning');
+        if (typeof step.headline === 'string') {
+            return step.headline.trim();
+        }
 
-        window.setTimeout(() => {
-            applyContent();
-            textContainer.classList.remove('is-transitioning');
-            imageContainer.classList.remove('is-transitioning');
-        }, transitionDuration);
+        return `Step ${index + 1}`;
     };
 
-    const setActiveTab = (index, options = {}) => {
-        const { shouldFocus = false, force = false } = options;
+    const tabs = steps.map((step, index) => {
+        const tab = document.createElement('button');
+        tab.className = 'how-we-work__tab';
+        tab.id = `how-we-work-tab-${index}`;
+        tab.type = 'button';
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-controls', `how-we-work-panel-${index}`);
+        tab.setAttribute('data-step', String(index));
+        const iconMarkup = typeof step.icon === 'string' ? step.icon : '';
+        const label = deriveLabel(step, index);
+        tab.innerHTML = `
+          <span class="how-we-work__tab-icon" aria-hidden="true">
+            ${iconMarkup}
+          </span>
+          <span>${label}</span>
+        `;
+        tabList.appendChild(tab);
+        return tab;
+    });
 
+    const panels = steps.map((step, index) => {
+        const panel = document.createElement('div');
+        panel.className = 'how-we-work__panel';
+        panel.id = `how-we-work-panel-${index}`;
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', `how-we-work-tab-${index}`);
+        panel.setAttribute('tabindex', '-1');
+        panel.innerHTML = `
+          <div class="how-we-work__content">
+            <div class="how-we-work__text">
+              <span class="how-we-work__chip">${step.chip}</span>
+              <h3 class="how-we-work__headline">${step.headline}</h3>
+              <p class="how-we-work__body">${step.body}</p>
+            </div>
+            <div class="how-we-work__image-wrapper">
+              <div class="how-we-work__image-frame">
+                <img src="${step.image?.src ?? ''}" alt="${step.image?.alt ?? ''}">
+              </div>
+            </div>
+          </div>
+        `;
+        panelsContainer.appendChild(panel);
+        return panel;
+    });
+
+    let activeIndex = 0;
+
+    const setActive = (index, focus = false) => {
         if (index < 0 || index >= tabs.length) {
             return;
         }
-
-        if (index === activeIndex && !force) {
-            if (shouldFocus) {
-                tabs[index].focus();
-            }
-            return;
-        }
-
-        activeIndex = index;
 
         tabs.forEach((tab, tabIndex) => {
             const isActive = tabIndex === index;
             tab.setAttribute('aria-selected', String(isActive));
             tab.setAttribute('tabindex', isActive ? '0' : '-1');
+            tab.classList.toggle('is-active', isActive);
         });
 
-        updatePanelContent(steps[index], index);
+        panels.forEach((panel, panelIndex) => {
+            const isActive = panelIndex === index;
+            panel.classList.toggle('is-active', isActive);
+            panel.toggleAttribute('hidden', !isActive);
+            if (isActive) {
+                panel.setAttribute('tabindex', '0');
+            } else {
+                panel.setAttribute('tabindex', '-1');
+            }
+        });
 
-        if (shouldFocus) {
+        activeIndex = index;
+
+        if (focus) {
             tabs[index].focus();
         }
     };
 
     const handleKeyDown = (event) => {
         const { key } = event;
+        const navigationKeys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
 
-        const navigationKeys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'Enter', ' '];
         if (!navigationKeys.includes(key)) {
+            if (key === 'Enter' || key === ' ') {
+                event.preventDefault();
+                setActive(activeIndex, true);
+            }
             return;
         }
 
+        event.preventDefault();
         const totalTabs = tabs.length;
         let targetIndex = activeIndex;
 
         switch (key) {
             case 'ArrowRight':
             case 'ArrowDown':
-                targetIndex = (activeIndex + 1 + totalTabs) % totalTabs;
-                event.preventDefault();
+                targetIndex = (activeIndex + 1) % totalTabs;
                 break;
             case 'ArrowLeft':
             case 'ArrowUp':
                 targetIndex = (activeIndex - 1 + totalTabs) % totalTabs;
-                event.preventDefault();
                 break;
             case 'Home':
                 targetIndex = 0;
-                event.preventDefault();
                 break;
             case 'End':
                 targetIndex = totalTabs - 1;
-                event.preventDefault();
                 break;
-            case 'Enter':
-            case ' ': {
-                event.preventDefault();
-                setActiveTab(activeIndex, { shouldFocus: true, force: true });
-                return;
-            }
             default:
                 break;
         }
 
-        setActiveTab(targetIndex, { shouldFocus: true });
+        setActive(targetIndex, true);
     };
 
     tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => setActiveTab(index, { shouldFocus: true }));
+        tab.addEventListener('click', () => setActive(index, true));
         tab.addEventListener('keydown', handleKeyDown);
     });
 
-    setActiveTab(0, { force: true });
+    setActive(0);
 }

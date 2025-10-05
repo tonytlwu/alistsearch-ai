@@ -191,18 +191,10 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 575px) {
   .how-we-work__tabs {
-    display: flex;
-    overflow-x: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-    padding-bottom: 8px;
-    margin-bottom: 32px;
-    scroll-snap-type: x proximity;
-  }
-
-  .how-we-work__tabs::-webkit-scrollbar {
-    height: 6px;
   }
 }
 
@@ -305,6 +297,11 @@
   padding: 40px;
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(45, 53, 97, 0.12);
+  display: none;
+}
+
+.how-we-work__panel.is-active {
+  display: block;
 }
 
 @media screen and (max-width: 991px) {
