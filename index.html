@@ -295,15 +295,71 @@
       title: 'Ready to Build Your Dream Team?',
       // Supporting text below the headline
       description: "Let's discuss how we can help you find exceptional talent that drives your company forward."
+    },
+    howWeWork: {
+      eyebrow: 'How We Work With You',
+      heading: 'A-List Search Partners With You Every Step',
+      subheading: 'Our proven four-step framework keeps your hiring search focused, collaborative, and on pace from kickoff to final review.',
+      steps: [
+        {
+          id: 'discovery-launch',
+          chip: 'Step 1 · Discovery Launch',
+          tabLabel: 'Discovery Launch',
+          icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><path d="M12 7V12L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
+          headline: 'Align on the role, the story, and the search strategy',
+          body: 'We start with an intensive intake to clarify success profiles, hiring timelines, and stakeholder priorities. Together we craft the hiring narrative, clarify target candidate pools, and outline the outreach plan so the search is set up to move quickly.',
+          image: {
+            src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
+            alt: 'Executive team and recruiter collaborating on hiring plan during discovery kickoff.'
+          }
+        },
+        {
+          id: 'source-qualify',
+          chip: 'Step 2 · Source Qualify',
+          tabLabel: 'Source Qualify',
+          icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 5H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><path d="M5 5L7 20L12 18L17 20L19 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M10 9H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>`,
+          headline: 'Surface best-fit talent and keep them engaged',
+          body: 'We activate curated outreach across our network and present a narrow slate of qualified candidates in the first two weeks. Every profile includes calibrated notes, alignment to must-have experience, and real-time feedback loops so you stay ahead of the market.',
+          image: {
+            src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80',
+            alt: 'Recruiter reviewing qualified candidate profiles on a digital dashboard.'
+          }
+        },
+        {
+          id: 'offer-signed',
+          chip: 'Step 3 · Offer Signed',
+          tabLabel: 'Offer Signed',
+          icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 3H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><path d="M5 6H19V18C19 19.1046 18.1046 20 17 20H7C5.89543 20 5 19.1046 5 18V6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9 11L11 13L15 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
+          headline: 'Close top candidates with clarity and momentum',
+          body: 'We partner with you on compensation strategy, expectation setting, and stakeholder alignment to secure a yes. From interview debriefs to reference checks and offer delivery, we manage the details so candidates feel supported and confident in their decision.',
+          image: {
+            src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80',
+            alt: 'Candidate signing an offer on a tablet while recruiter congratulates via video call.'
+          }
+        },
+        {
+          id: 'delivery-review',
+          chip: 'Step 4 · Delivery Review',
+          tabLabel: 'Delivery Review',
+          icon: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><path d="M6 19V7L14 5V19" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><path d="M18 14C16.3431 14 15 12.6569 15 11C15 9.34315 16.3431 8 18 8C19.6569 8 21 9.34315 21 11C21 12.6569 19.6569 14 18 14Z" stroke="currentColor" stroke-width="1.5"></path><path d="M17 11H18.2V9.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>`,
+          headline: 'Reflect, optimize, and prepare for long-term success',
+          body: 'After placement, we host a delivery review to capture lessons learned, hand off onboarding insights, and refine the partnership playbook. Our goal is to ensure a smooth transition for your new hire and set the stage for future searches.',
+          image: {
+            src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
+            alt: 'Leadership team reviewing dashboards and feedback during delivery review session.'
+          }
+        }
+      ]
     }
   };
 </script>
+
 
 <!-- Header -->
 <div id="header">
   <div class="container">
     <h2 class="logo">
-      <a href="https://alistsearch.ai/" title="A-List Search" rel="home">A-List Search</a>
+      <a href="/" title="A-List Search" rel="home">A-List Search</a>
     </h2>
   </div>
 </div>
@@ -340,6 +396,20 @@
           </svg>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="how-we-work" aria-labelledby="how-we-work-heading">
+    <div class="container">
+      <div class="how-we-work__intro">
+        <p class="how-we-work__eyebrow"></p>
+        <h2 id="how-we-work-heading" class="how-we-work__heading"></h2>
+        <p class="how-we-work__subheading"></p>
+      </div>
+
+      <div class="how-we-work__tabs" role="tablist" aria-label="How we work steps"></div>
+
+      <div class="how-we-work__panels"></div>
     </div>
   </section>
 

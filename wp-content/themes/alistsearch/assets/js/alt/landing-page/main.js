@@ -29,7 +29,7 @@ class MetricsAnimator {
     animateMetrics() {
         this.metricsSection.classList.add('animate');
         const cards = this.metricsSection.querySelectorAll('.metric-card');
-        
+
         cards.forEach((card, index) => {
             setTimeout(() => {
                 card.classList.add('animate-in');
@@ -46,19 +46,19 @@ class MetricsAnimator {
 
         // Check if it's a range (contains hyphen) or a single number
         const isRange = targetValue.includes('-');
-        
+
         if (isRange) {
             const [minVal, maxVal] = targetValue.split('-').map(val => parseInt(val.trim()));
-            
+
             const updateNumber = (currentTime) => {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
-                
+
                 // Animate both numbers independently
                 const currentMin = Math.floor(easeProgress * minVal);
                 const currentMax = Math.floor(easeProgress * maxVal);
-                
+
                 numberElement.textContent = `${currentMin}-${currentMax}`;
 
                 if (progress < 1) {
@@ -72,13 +72,13 @@ class MetricsAnimator {
         } else {
             // Original logic for single numbers
             const target = parseInt(targetValue) || 0;
-            
+
             const updateNumber = (currentTime) => {
                 const elapsed = currentTime - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
                 const current = Math.floor(easeProgress * target);
-                
+
                 numberElement.textContent = current;
 
                 if (progress < 1) {
@@ -111,7 +111,7 @@ class RoleTyper {
         const role = this.roles[this.currentRole];
         const typingSpeed = this.isDeleting ? 50 : 100;
 
-        this.currentText = this.isDeleting 
+        this.currentText = this.isDeleting
             ? role.substring(0, this.currentText.length - 1)
             : role.substring(0, this.currentText.length + 1);
 
@@ -168,7 +168,7 @@ class InfiniteCarousel {
     setupInfiniteLoop() {
         const itemWidth = 284;
         const totalWidth = this.items.length * itemWidth;
-        
+
         const style = document.createElement('style');
         style.textContent = `
             @keyframes infiniteScroll {
@@ -213,7 +213,7 @@ function renderTestimonial(config) {
 
 function renderContent(config) {
     document.querySelector('.hero__description').textContent = config.hero.description;
-    
+
     const finalCta = document.querySelector('.final-cta');
     finalCta.querySelector('h2').textContent = config.finalCta.title;
     finalCta.querySelector('p').textContent = config.finalCta.description;
@@ -252,7 +252,7 @@ function renderMetrics(config) {
 
 function addAutoplayToYouTubeUrl(url, autoplay = false) {
     if (!url.includes('youtube.com/embed/')) return url;
-    
+
     const urlObj = new URL(url);
     if (autoplay) {
         urlObj.searchParams.set('autoplay', '1');
@@ -263,17 +263,17 @@ function addAutoplayToYouTubeUrl(url, autoplay = false) {
 function renderVideoSection(config) {
     const videoSection = document.querySelector('.video-section');
     const videosConfig = config.videos || (config.video ? [config.video] : []);
-    
+
     if (!videosConfig.length) {
         videoSection.style.display = 'none';
         return;
     }
-    
+
     videoSection.style.display = 'block';
-    
+
     const thumbnailsContainer = videoSection.querySelector('.video-thumbnails');
     const videoIframe = videoSection.querySelector('iframe');
-    
+
     // If only one video, hide thumbnails and show video directly
     if (videosConfig.length === 1) {
         thumbnailsContainer.style.display = 'none';
@@ -282,7 +282,7 @@ function renderVideoSection(config) {
         videoIframe.title = video.title;
         return;
     }
-    
+
     // Multiple videos: show thumbnails
     thumbnailsContainer.style.display = 'flex';
     thumbnailsContainer.innerHTML = videosConfig.map((video, index) => `
@@ -291,27 +291,27 @@ function renderVideoSection(config) {
             <div class="video-thumbnail__title">${video.title}</div>
         </div>
     `).join('');
-    
+
     // Initialize with first video
     const firstVideo = videosConfig[0];
     videoIframe.src = firstVideo.url;
     videoIframe.title = firstVideo.title;
-    
+
     // Add click handlers for thumbnails
     thumbnailsContainer.addEventListener('click', (e) => {
         const thumbnail = e.target.closest('.video-thumbnail');
         if (!thumbnail) return;
-        
+
         const videoId = thumbnail.getAttribute('data-video-id');
         const selectedVideo = videosConfig.find(v => (v.id || videosConfig.indexOf(v).toString()) === videoId);
-        
+
         if (selectedVideo) {
             // Update active state
-            thumbnailsContainer.querySelectorAll('.video-thumbnail').forEach(thumb => 
+            thumbnailsContainer.querySelectorAll('.video-thumbnail').forEach(thumb =>
                 thumb.classList.remove('active')
             );
             thumbnail.classList.add('active');
-            
+
             // Switch video with autoplay
             videoIframe.src = addAutoplayToYouTubeUrl(selectedVideo.url, true);
             videoIframe.title = selectedVideo.title;
@@ -337,7 +337,7 @@ class ScrollController {
     init() {
         this.setupScrollIndicator();
         this.setupRevealAnimations();
-        
+
         window.addEventListener('scroll', () => {
             if (!this.ticking) {
                 requestAnimationFrame(() => {
@@ -352,11 +352,11 @@ class ScrollController {
     setupScrollIndicator() {
         const indicator = document.querySelector('.scroll-indicator');
         const hero = document.querySelector('.hero');
-        
+
         if (!indicator || !hero) return;
 
         indicator.addEventListener('click', () => {
-            document.querySelector('.credibility')?.scrollIntoView({ 
+            document.querySelector('.credibility')?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
@@ -381,12 +381,12 @@ class ScrollController {
     updateScrollIndicator() {
         const indicator = document.querySelector('.scroll-indicator');
         const hero = document.querySelector('.hero');
-        
+
         if (!indicator || !hero) return;
 
         const heroRect = hero.getBoundingClientRect();
         const isHidden = heroRect.bottom < window.innerHeight * 0.3;
-        
+
         indicator.style.opacity = isHidden ? '0' : '';
         indicator.style.pointerEvents = isHidden ? 'none' : '';
     }
@@ -422,8 +422,10 @@ function initializePage(config) {
     renderVideoSection(config);
 
     initializeCtaLinks(config);
-    
+
     setTimeout(() => new ScrollController(), 100);
+
+    initializeHowWeWorkSection(config);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -431,3 +433,176 @@ document.addEventListener('DOMContentLoaded', () => {
         initializePage(window.pageConfig);
     }
 });
+
+function initializeHowWeWorkSection(config) {
+    const container = document.querySelector('.how-we-work');
+    const tabList = container?.querySelector('.how-we-work__tabs');
+    const panelsContainer = container?.querySelector('.how-we-work__panels');
+    const introEyebrow = container?.querySelector('.how-we-work__eyebrow');
+    const introHeading = container?.querySelector('.how-we-work__heading');
+    const introSubheading = container?.querySelector('.how-we-work__subheading');
+    const howWeWorkConfig = config.howWeWork;
+
+    if (!container || !tabList || !panelsContainer || !howWeWorkConfig || !Array.isArray(howWeWorkConfig.steps) || howWeWorkConfig.steps.length === 0) {
+        return;
+    }
+
+    if (introEyebrow) {
+        introEyebrow.textContent = howWeWorkConfig.eyebrow ?? introEyebrow.textContent ?? '';
+    }
+
+    if (introHeading) {
+        introHeading.textContent = howWeWorkConfig.heading ?? introHeading.textContent ?? '';
+    }
+
+    if (introSubheading) {
+        introSubheading.textContent = howWeWorkConfig.subheading ?? introSubheading.textContent ?? '';
+    }
+
+    tabList.innerHTML = '';
+    panelsContainer.innerHTML = '';
+
+    const steps = howWeWorkConfig.steps;
+
+    const deriveLabel = (step, index) => {
+        if (typeof step.tabLabel === 'string' && step.tabLabel.trim().length > 0) {
+            return step.tabLabel.trim();
+        }
+
+        if (typeof step.chip === 'string') {
+            const chipParts = step.chip.split('·');
+            if (chipParts.length > 1) {
+                return chipParts[1].trim();
+            }
+            return step.chip.trim();
+        }
+
+        if (typeof step.headline === 'string') {
+            return step.headline.trim();
+        }
+
+        return `Step ${index + 1}`;
+    };
+
+    const tabs = steps.map((step, index) => {
+        const tab = document.createElement('button');
+        tab.className = 'how-we-work__tab';
+        tab.id = `how-we-work-tab-${index}`;
+        tab.type = 'button';
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-controls', `how-we-work-panel-${index}`);
+        tab.setAttribute('data-step', String(index));
+        const iconMarkup = typeof step.icon === 'string' ? step.icon : '';
+        const label = deriveLabel(step, index);
+        tab.innerHTML = `
+          <span class="how-we-work__tab-icon" aria-hidden="true">
+            ${iconMarkup}
+          </span>
+          <span>${label}</span>
+        `;
+        tabList.appendChild(tab);
+        return tab;
+    });
+
+    const panels = steps.map((step, index) => {
+        const panel = document.createElement('div');
+        panel.className = 'how-we-work__panel';
+        panel.id = `how-we-work-panel-${index}`;
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', `how-we-work-tab-${index}`);
+        panel.setAttribute('tabindex', '-1');
+        panel.innerHTML = `
+          <div class="how-we-work__content">
+            <div class="how-we-work__text">
+              <span class="how-we-work__chip">${step.chip}</span>
+              <h3 class="how-we-work__headline">${step.headline}</h3>
+              <p class="how-we-work__body">${step.body}</p>
+            </div>
+            <div class="how-we-work__image-wrapper">
+              <div class="how-we-work__image-frame">
+                <img src="${step.image?.src ?? ''}" alt="${step.image?.alt ?? ''}">
+              </div>
+            </div>
+          </div>
+        `;
+        panelsContainer.appendChild(panel);
+        return panel;
+    });
+
+    let activeIndex = 0;
+
+    const setActive = (index, focus = false) => {
+        if (index < 0 || index >= tabs.length) {
+            return;
+        }
+
+        tabs.forEach((tab, tabIndex) => {
+            const isActive = tabIndex === index;
+            tab.setAttribute('aria-selected', String(isActive));
+            tab.setAttribute('tabindex', isActive ? '0' : '-1');
+            tab.classList.toggle('is-active', isActive);
+        });
+
+        panels.forEach((panel, panelIndex) => {
+            const isActive = panelIndex === index;
+            panel.classList.toggle('is-active', isActive);
+            panel.toggleAttribute('hidden', !isActive);
+            if (isActive) {
+                panel.setAttribute('tabindex', '0');
+            } else {
+                panel.setAttribute('tabindex', '-1');
+            }
+        });
+
+        activeIndex = index;
+
+        if (focus) {
+            tabs[index].focus();
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        const { key } = event;
+        const navigationKeys = ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+
+        if (!navigationKeys.includes(key)) {
+            if (key === 'Enter' || key === ' ') {
+                event.preventDefault();
+                setActive(activeIndex, true);
+            }
+            return;
+        }
+
+        event.preventDefault();
+        const totalTabs = tabs.length;
+        let targetIndex = activeIndex;
+
+        switch (key) {
+            case 'ArrowRight':
+            case 'ArrowDown':
+                targetIndex = (activeIndex + 1) % totalTabs;
+                break;
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                targetIndex = (activeIndex - 1 + totalTabs) % totalTabs;
+                break;
+            case 'Home':
+                targetIndex = 0;
+                break;
+            case 'End':
+                targetIndex = totalTabs - 1;
+                break;
+            default:
+                break;
+        }
+
+        setActive(targetIndex, true);
+    };
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => setActive(index, true));
+        tab.addEventListener('keydown', handleKeyDown);
+    });
+
+    setActive(0);
+}
