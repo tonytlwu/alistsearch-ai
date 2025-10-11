@@ -49,6 +49,20 @@
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 50%;
+
+  /* Spacing system for consistent layouts */
+  --spacing-section: 8rem;        /* 128px - consistent section padding */
+  --spacing-section-md: 6rem;     /* 96px - medium screens */
+  --spacing-section-sm: 4rem;     /* 64px - small screens */
+  --spacing-section-xs: 3rem;     /* 48px - extra small screens */
+
+  --spacing-card-padding: 2.5rem; /* 40px - card padding */
+  --spacing-card-padding-md: 2rem;/* 32px - card padding medium */
+  --spacing-card-padding-sm: 1.5rem; /* 24px - card padding small */
+
+  --spacing-grid-gap: 2.5rem;     /* 40px - grid gap */
+  --spacing-grid-gap-md: 2rem;    /* 32px - grid gap medium */
+  --spacing-grid-gap-sm: 1.5rem;  /* 24px - grid gap small */
 }
 
 /* Enhanced body with smooth scrolling */

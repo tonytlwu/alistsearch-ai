@@ -817,10 +817,22 @@
 
 
 .trust-features {
-  padding: 8rem 0;
+  padding: var(--spacing-section) 0;
   background: var(--gradient-secondary);
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 1199px) {
+  .trust-features {
+    padding: var(--spacing-section-md) 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .trust-features {
+    padding: var(--spacing-section-sm) 0;
+  }
 }
 
 /* Decorative background elements */
@@ -864,12 +876,18 @@
   backdrop-filter: blur(10px);
   border-radius: var(--radius-xl);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 2.5rem 2rem;
+  padding: var(--spacing-card-padding) var(--spacing-card-padding-md);
   box-shadow: var(--shadow-lg);
   transition: all var(--duration-normal) var(--ease-out);
   position: relative;
   overflow: hidden;
   z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .card {
+    padding: var(--spacing-card-padding-md) var(--spacing-card-padding-sm);
+  }
 }
 
 /* Card hover animation */
@@ -970,10 +988,22 @@
 
 /* Enhanced Company-based Credibility Section */
 .credibility {
-  padding: 8rem 0;
+  padding: var(--spacing-section) 0;
   background: white;
   position: relative;
   width: 100%;
+}
+
+@media (max-width: 1199px) {
+  .credibility {
+    padding: var(--spacing-section-md) 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .credibility {
+    padding: var(--spacing-section-sm) 0;
+  }
 }
 
 .credibility__title {
@@ -1144,12 +1174,24 @@
 
 /* Enhanced Testimonial and CTA Section */
 .testimonial-cta {
-  padding: 8rem 0;
+  padding: var(--spacing-section) 0;
   background: var(--gradient-hero);
   color: var(--color-primary-text);
   text-align: center;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 1199px) {
+  .testimonial-cta {
+    padding: var(--spacing-section-md) 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .testimonial-cta {
+    padding: var(--spacing-section-sm) 0;
+  }
 }
 
 /* Animated background elements */
@@ -1614,19 +1656,19 @@
 /* Pricing Section */
 .pricing {
   background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(244, 246, 248, 0.96) 100%);
-  padding: 96px 0;
+  padding: var(--spacing-section) 0;
   position: relative;
 }
 
 @media screen and (max-width: 1199px) {
   .pricing {
-    padding: 64px 0;
+    padding: var(--spacing-section-md) 0;
   }
 }
 
 @media screen and (max-width: 767px) {
   .pricing {
-    padding: 48px 0;
+    padding: var(--spacing-section-sm) 0;
   }
 }
 
@@ -1678,7 +1720,7 @@
   display: grid;
   margin-bottom: 48px;
   position: relative;
-  gap: 32px;
+  gap: var(--spacing-grid-gap-sm);
 }
 
 @media screen and (min-width: 768px) {
@@ -1686,7 +1728,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 24px;
+    gap: var(--spacing-grid-gap);
   }
 }
 
@@ -1712,8 +1754,8 @@
 
 .pricing__step {
   background: rgba(255, 255, 255, 0.98);
-  border-radius: 24px;
-  padding: 40px 32px;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-card-padding) var(--spacing-card-padding-md);
   box-shadow: var(--shadow-lg);
   border: 1px solid rgba(45, 53, 97, 0.12);
   display: flex;
@@ -1735,13 +1777,13 @@
 
 @media screen and (max-width: 991px) {
   .pricing__step {
-    padding: 32px 24px;
+    padding: var(--spacing-card-padding-md) var(--spacing-card-padding-sm);
   }
 }
 
 @media screen and (max-width: 767px) {
   .pricing__step {
-    padding: 32px 24px;
+    padding: var(--spacing-card-padding-md) var(--spacing-card-padding-sm);
   }
 }
 
