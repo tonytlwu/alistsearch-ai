@@ -356,7 +356,7 @@ class ScrollController {
         if (!indicator || !hero) return;
 
         indicator.addEventListener('click', () => {
-            document.querySelector('.credibility')?.scrollIntoView({
+            document.querySelector('.how-we-work')?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
