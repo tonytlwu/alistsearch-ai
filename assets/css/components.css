@@ -1780,15 +1780,27 @@
 }
 
 .pricing__step-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px;
+  color: var(--color-secondary);
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
   transition: all var(--duration-normal) var(--ease-out);
+}
+
+.pricing__step-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
 }
 
 .pricing__step:hover .pricing__step-icon {
   transform: scale(1.1);
   filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.15));
+  color: var(--color-secondary-dark);
 }
 
 .pricing__step-title {
@@ -1857,9 +1869,20 @@
 }
 
 .pricing__guarantee-icon {
-  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
+  color: var(--color-secondary);
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.pricing__guarantee-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
 }
 
 .pricing__guarantee-content {
