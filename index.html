@@ -297,6 +297,36 @@
       // Supporting text below the headline
       description: "Let's discuss how we can help you find exceptional talent that drives your company forward."
     },
+    pricing: {
+      eyebrow: 'Simple, Transparent Pricing',
+      heading: '25% of Cash Compensation',
+      subheading: 'Paid in thirds as we move through each stage of the search.',
+      steps: [
+        {
+          icon: '🔍',
+          title: 'Start Search',
+          description: 'We kick things off by learning your story — why this role matters, what makes the opportunity compelling, and exactly what success looks like. Once aligned, we activate the search and hit the ground running.',
+          fee: '⅓ Fee'
+        },
+        {
+          icon: '📋',
+          title: 'Shortlist Delivered',
+          description: 'We have mapped the market, engaged top talent, and narrowed the field to a curated shortlist of exceptional candidates ready for next-round interviews.',
+          fee: '⅓ Fee'
+        },
+        {
+          icon: '🤝',
+          title: 'Offer Accepted',
+          description: 'Together, we have identified the right hire, navigated final rounds and successfully closed on your exceptional hire.',
+          fee: '⅓ Fee'
+        }
+      ],
+      guarantee: {
+        icon: '✅',
+        title: 'Backed by Our 90-Day Replacement Guarantee',
+        description: 'We stand behind every placement — because our success is measured by yours.'
+      }
+    },
     howWeWork: {
       eyebrow: 'How We Work With You',
       heading: 'A-List Search Partners With You Every Step',
@@ -444,6 +474,25 @@
     <div class="container">
       <h2 class="trust-features__title"></h2>
       <div class="grid"></div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="container">
+      <div class="pricing__intro">
+        <p class="pricing__eyebrow"></p>
+        <h2 class="pricing__heading"></h2>
+        <p class="pricing__subheading"></p>
+      </div>
+
+      <div class="pricing__timeline">
+        <!-- Steps will be populated by JavaScript -->
+      </div>
+
+      <div class="pricing__guarantee">
+        <!-- Guarantee will be populated by JavaScript -->
+      </div>
     </div>
   </section>
 

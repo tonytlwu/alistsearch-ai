@@ -426,6 +426,7 @@ function initializePage(config) {
     setTimeout(() => new ScrollController(), 100);
 
     initializeHowWeWorkSection(config);
+    initializePricingSection(config);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -605,4 +606,59 @@ function initializeHowWeWorkSection(config) {
     });
 
     setActive(0);
+}
+
+function initializePricingSection(config) {
+    const container = document.querySelector('.pricing');
+    const eyebrowElement = container?.querySelector('.pricing__eyebrow');
+    const headingElement = container?.querySelector('.pricing__heading');
+    const subheadingElement = container?.querySelector('.pricing__subheading');
+    const timelineElement = container?.querySelector('.pricing__timeline');
+    const guaranteeElement = container?.querySelector('.pricing__guarantee');
+    const pricingConfig = config.pricing;
+
+    if (!container || !pricingConfig) {
+        return;
+    }
+
+    // Populate intro text
+    if (eyebrowElement && pricingConfig.eyebrow) {
+        eyebrowElement.textContent = pricingConfig.eyebrow;
+    }
+
+    if (headingElement && pricingConfig.heading) {
+        headingElement.textContent = pricingConfig.heading;
+    }
+
+    if (subheadingElement && pricingConfig.subheading) {
+        subheadingElement.textContent = pricingConfig.subheading;
+    }
+
+    // Populate timeline steps
+    if (timelineElement && Array.isArray(pricingConfig.steps)) {
+        timelineElement.innerHTML = '';
+
+        pricingConfig.steps.forEach(step => {
+            const stepElement = document.createElement('div');
+            stepElement.className = 'pricing__step';
+            stepElement.innerHTML = `
+                <div class="pricing__step-icon">${step.icon || ''}</div>
+                <h3 class="pricing__step-title">${step.title || ''}</h3>
+                <p class="pricing__step-description">${step.description || ''}</p>
+                <div class="pricing__step-fee">${step.fee || ''}</div>
+            `;
+            timelineElement.appendChild(stepElement);
+        });
+    }
+
+    // Populate guarantee box
+    if (guaranteeElement && pricingConfig.guarantee) {
+        guaranteeElement.innerHTML = `
+            <div class="pricing__guarantee-icon">${pricingConfig.guarantee.icon || ''}</div>
+            <div class="pricing__guarantee-content">
+                <h4 class="pricing__guarantee-title">${pricingConfig.guarantee.title || ''}</h4>
+                <p class="pricing__guarantee-description">${pricingConfig.guarantee.description || ''}</p>
+            </div>
+        `;
+    }
 }
