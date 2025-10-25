@@ -260,61 +260,294 @@ function addAutoplayToYouTubeUrl(url, autoplay = false) {
     return urlObj.toString();
 }
 
-function renderVideoSection(config) {
-    const videoSection = document.querySelector('.video-section');
-    const videosConfig = config.videos || (config.video ? [config.video] : []);
+// Case Studies Section Rendering
+function renderCaseStudiesSection(config) {
+    const section = document.querySelector('.case-studies');
+    if (!section) return;
 
-    if (!videosConfig.length) {
-        videoSection.style.display = 'none';
+    // Support both caseStudies and videos config for backward compatibility
+    const caseStudies = config.caseStudies || [];
+
+    if (!caseStudies.length) {
+        section.style.display = 'none';
         return;
     }
 
-    videoSection.style.display = 'block';
+    section.style.display = 'block';
 
-    const thumbnailsContainer = videoSection.querySelector('.video-thumbnails');
-    const videoIframe = videoSection.querySelector('iframe');
+    // Render content (always use tabs)
+    renderCaseStudyContent(section, caseStudies[0]);
 
-    // If only one video, hide thumbnails and show video directly
-    if (videosConfig.length === 1) {
+    // Render thumbnails
+    renderCaseStudyThumbnails(section, caseStudies);
+
+    // Initialize interactivity
+    initializeCaseStudySwitcher(section, caseStudies);
+}
+
+function renderCaseStudyContent(section, caseStudy) {
+    const contentArea = section.querySelector('.case-studies__content-area');
+    const videoIframe = section.querySelector('.case-studies__video iframe');
+
+    // Update video
+    if (caseStudy.video) {
+        videoIframe.src = caseStudy.video.url;
+        videoIframe.title = caseStudy.video.title;
+    }
+
+    // Always render tabs and panels
+    renderCaseStudyTabsAndPanels(contentArea, caseStudy);
+}
+
+function renderCaseStudyCards(container, caseStudy) {
+    const cardsHTML = `
+        <div class="case-studies__cards">
+            ${renderOverviewCard(caseStudy.overview)}
+            ${renderChallengeCard(caseStudy.challenge)}
+            ${renderSolutionCard(caseStudy.solution)}
+            ${renderResultsCard(caseStudy.results)}
+            ${caseStudy.quote ? renderQuoteCard(caseStudy.quote) : ''}
+        </div>
+    `;
+    container.innerHTML = cardsHTML;
+}
+
+function renderCaseStudyTabsAndPanels(container, caseStudy) {
+    const tabsHTML = `
+        <div class="case-studies__tabs">
+            <button class="case-studies__tab active" data-tab="overview">Overview</button>
+            <button class="case-studies__tab" data-tab="challenge">Challenge</button>
+            <button class="case-studies__tab" data-tab="solution">Solution</button>
+            <button class="case-studies__tab" data-tab="results">Results</button>
+        </div>
+    `;
+
+    const panelsHTML = `
+        <div class="case-studies__panels">
+            <div class="case-studies__panel active" data-panel="overview">
+                ${renderOverviewContent(caseStudy.overview)}
+            </div>
+            <div class="case-studies__panel" data-panel="challenge">
+                ${renderChallengeContent(caseStudy.challenge)}
+            </div>
+            <div class="case-studies__panel" data-panel="solution">
+                ${renderSolutionContent(caseStudy.solution)}
+            </div>
+            <div class="case-studies__panel" data-panel="results">
+                ${renderResultsContent(caseStudy.results)}
+                ${caseStudy.quote ? renderQuoteContent(caseStudy.quote) : ''}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = tabsHTML + panelsHTML;
+
+    // Add tab click handlers
+    container.querySelectorAll('.case-studies__tab').forEach(tab => {
+        tab.addEventListener('click', () => handleTabClick(tab, container));
+    });
+}
+
+function handleTabClick(clickedTab, container) {
+    const tabName = clickedTab.getAttribute('data-tab');
+
+    // Update tab active state
+    container.querySelectorAll('.case-studies__tab').forEach(tab => {
+        tab.classList.toggle('active', tab === clickedTab);
+    });
+
+    // Update panel active state
+    container.querySelectorAll('.case-studies__panel').forEach(panel => {
+        const isActive = panel.getAttribute('data-panel') === tabName;
+        panel.classList.toggle('active', isActive);
+    });
+}
+
+// Helper functions to render each section
+function renderOverviewCard(overview) {
+    if (!overview) return '';
+    return `
+        <div class="case-study-card">
+            <h3 class="case-study-card__title">Company Overview</h3>
+            <div class="case-study-overview">
+                ${Object.entries(overview).map(([key, value]) => `
+                    <div class="case-study-overview__item">
+                        <div class="case-study-overview__label">${formatLabel(key)}</div>
+                        <div class="case-study-overview__value">${value}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function renderOverviewContent(overview) {
+    if (!overview) return '';
+    return `
+        <div class="case-study-overview">
+            ${Object.entries(overview).map(([key, value]) => `
+                <div class="case-study-overview__item">
+                    <div class="case-study-overview__label">${formatLabel(key)}</div>
+                    <div class="case-study-overview__value">${value}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function renderChallengeCard(challenge) {
+    if (!challenge) return '';
+    return `
+        <div class="case-study-card">
+            <h3 class="case-study-card__title">The Challenge</h3>
+            <div class="case-study-content__description">${challenge.description}</div>
+            ${challenge.points ? `
+                <div class="case-study-content__subheading">Why it was challenging:</div>
+                <ul class="case-study-content__list">
+                    ${challenge.points.map(point => `<li>${point}</li>`).join('')}
+                </ul>
+            ` : ''}
+        </div>
+    `;
+}
+
+function renderChallengeContent(challenge) {
+    if (!challenge) return '';
+    return `
+        <div class="case-study-content__description">${challenge.description}</div>
+        ${challenge.points ? `
+            <div class="case-study-content__subheading">Why it was challenging:</div>
+            <ul class="case-study-content__list">
+                ${challenge.points.map(point => `<li>${point}</li>`).join('')}
+            </ul>
+        ` : ''}
+    `;
+}
+
+function renderSolutionCard(solution) {
+    if (!solution) return '';
+    return `
+        <div class="case-study-card">
+            <h3 class="case-study-card__title">Our Solution</h3>
+            <div class="case-study-content__description">${solution.description}</div>
+            ${solution.highlights ? `
+                <div class="case-study-content__subheading">Execution Highlights:</div>
+                <ul class="case-study-content__list">
+                    ${solution.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+                </ul>
+            ` : ''}
+        </div>
+    `;
+}
+
+function renderSolutionContent(solution) {
+    if (!solution) return '';
+    return `
+        <div class="case-study-content__description">${solution.description}</div>
+        ${solution.highlights ? `
+            <div class="case-study-content__subheading">Execution Highlights:</div>
+            <ul class="case-study-content__list">
+                ${solution.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+            </ul>
+        ` : ''}
+    `;
+}
+
+function renderResultsCard(results) {
+    if (!results || !results.length) return '';
+    return `
+        <div class="case-study-card">
+            <h3 class="case-study-card__title">Results</h3>
+            <ul class="case-study-results">
+                ${results.map(result => `<li>${result}</li>`).join('')}
+            </ul>
+        </div>
+    `;
+}
+
+function renderResultsContent(results) {
+    if (!results || !results.length) return '';
+    return `
+        <ul class="case-study-results">
+            ${results.map(result => `<li>${result}</li>`).join('')}
+        </ul>
+    `;
+}
+
+function renderQuoteCard(quote) {
+    if (!quote) return '';
+    return `
+        <div class="case-study-card">
+            <h3 class="case-study-card__title">Client Testimonial</h3>
+            <div class="case-study-quote">
+                <div class="case-study-quote__text">${quote.text}</div>
+                <div class="case-study-quote__author">${quote.author}</div>
+                ${quote.title ? `<div class="case-study-quote__title">${quote.title}</div>` : ''}
+            </div>
+        </div>
+    `;
+}
+
+function renderQuoteContent(quote) {
+    if (!quote) return '';
+    return `
+        <div class="case-study-quote">
+            <div class="case-study-quote__text">${quote.text}</div>
+            <div class="case-study-quote__author">${quote.author}</div>
+            ${quote.title ? `<div class="case-study-quote__title">${quote.title}</div>` : ''}
+        </div>
+    `;
+}
+
+function formatLabel(key) {
+    // Convert camelCase to Title Case
+    return key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, str => str.toUpperCase())
+        .trim();
+}
+
+function renderCaseStudyThumbnails(section, caseStudies) {
+    const thumbnailsContainer = section.querySelector('.case-studies__thumbnails');
+
+    if (caseStudies.length <= 1) {
         thumbnailsContainer.style.display = 'none';
-        const video = videosConfig[0];
-        videoIframe.src = video.url;
-        videoIframe.title = video.title;
         return;
     }
 
-    // Multiple videos: show thumbnails
     thumbnailsContainer.style.display = 'flex';
-    thumbnailsContainer.innerHTML = videosConfig.map((video, index) => `
-        <div class="video-thumbnail ${index === 0 ? 'active' : ''}" data-video-id="${video.id || index}">
-            <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-            <div class="video-thumbnail__title">${video.title}</div>
+    thumbnailsContainer.innerHTML = caseStudies.map((caseStudy, index) => `
+        <div class="video-thumbnail ${index === 0 ? 'active' : ''}" data-case-study-index="${index}">
+            <img src="${caseStudy.video.thumbnail}" alt="${caseStudy.video.title}" loading="lazy">
+            <div class="video-thumbnail__title">${caseStudy.video.title}</div>
         </div>
     `).join('');
+}
 
-    // Initialize with first video
-    const firstVideo = videosConfig[0];
-    videoIframe.src = firstVideo.url;
-    videoIframe.title = firstVideo.title;
+function initializeCaseStudySwitcher(section, caseStudies) {
+    const thumbnailsContainer = section.querySelector('.case-studies__thumbnails');
 
-    // Add click handlers for thumbnails
     thumbnailsContainer.addEventListener('click', (e) => {
         const thumbnail = e.target.closest('.video-thumbnail');
         if (!thumbnail) return;
 
-        const videoId = thumbnail.getAttribute('data-video-id');
-        const selectedVideo = videosConfig.find(v => (v.id || videosConfig.indexOf(v).toString()) === videoId);
+        const index = parseInt(thumbnail.getAttribute('data-case-study-index'));
+        const selectedCaseStudy = caseStudies[index];
 
-        if (selectedVideo) {
+        if (selectedCaseStudy) {
             // Update active state
             thumbnailsContainer.querySelectorAll('.video-thumbnail').forEach(thumb =>
                 thumb.classList.remove('active')
             );
             thumbnail.classList.add('active');
 
-            // Switch video with autoplay
-            videoIframe.src = addAutoplayToYouTubeUrl(selectedVideo.url, true);
-            videoIframe.title = selectedVideo.title;
+            // Switch case study content and video
+            const videoIframe = section.querySelector('.case-studies__video iframe');
+            videoIframe.src = addAutoplayToYouTubeUrl(selectedCaseStudy.video.url, true);
+            videoIframe.title = selectedCaseStudy.video.title;
+
+            // Re-render content
+            renderCaseStudyContent(section, selectedCaseStudy);
         }
     });
 }
@@ -419,7 +652,7 @@ function initializePage(config) {
 
     new MetricsAnimator();
 
-    renderVideoSection(config);
+    renderCaseStudiesSection(config);
 
     initializeCtaLinks(config);
 

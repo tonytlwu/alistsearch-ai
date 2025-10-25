@@ -171,38 +171,6 @@
         ]
     },
 
-    // Video section configuration
-    // Displays featured videos with thumbnails for switching
-    videos: [
-    {
-        id: 'two-boxes',
-        // YouTube embed URL (must be in format: https://www.youtube.com/embed/VIDEO_ID)
-        url: 'https://www.youtube.com/embed/71VnbMNBniI',
-        // Title attribute for the iframe (for accessibility)
-        title: 'Evan Stalter - Two Boxes (Cofounder/CPO)',
-        // Thumbnail image URL (YouTube thumbnail or custom image)
-        thumbnail: 'https://img.youtube.com/vi/71VnbMNBniI/maxresdefault.jpg'
-      },
-      {
-        id: 'two-boxes-2',
-        url: 'https://www.youtube.com/embed/Fokw4cjivCg',
-        title: 'Kyle Bertin - Two Boxes (Cofounder/CEO)',
-        thumbnail: 'https://img.youtube.com/vi/Fokw4cjivCg/maxresdefault.jpg'
-      },
-      {
-        id: 'elovee',
-        url: 'https://www.youtube.com/embed/Jb3CXJAdaWk',
-        title: 'Paul Campbell  - Elovee (CEO)',
-        thumbnail: 'https://img.youtube.com/vi/Jb3CXJAdaWk/maxresdefault.jpg'
-      },
-      {
-        id: 'newsela',
-        url: 'https://www.youtube.com/embed/9zD0SzvUmqk',
-        title: 'Eric Bacolas - Newsela (Chief People Officer)',
-        thumbnail: 'https://img.youtube.com/vi/9zD0SzvUmqk/maxresdefault.jpg'
-      }
-    ],
-
     // Trust features section configuration
     // Highlights key selling points with icons and descriptions
     trustFeatures: {
@@ -351,7 +319,237 @@
           }
         }
       ]
-    }
+    },
+
+    // Case Studies section configuration
+    // Displays detailed case studies with video testimonials and structured content
+    caseStudies: [
+      {
+        id: 'hetal',
+        company: 'Hetal',
+        video: {
+          url: 'https://www.youtube.com/embed/XZZsS2FRv1g',
+          thumbnail: 'https://img.youtube.com/vi/XZZsS2FRv1g/maxresdefault.jpg',
+          title: 'David Roger - Hetal (CEO)'
+        },
+        overview: {
+          name: 'Hetal',
+          founded: '2023',
+          industry: 'AI-Driven Retail Tech',
+          headquarters: 'New York City, NY',
+          technology: 'Computer Vision + Generative AI',
+          stage: 'Seed (Investors include: SuperAngel, NVP and Nomad Ventures)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Hetal is reimagining how retailers analyze in-store behavior using computer vision and AI to optimize product placement and customer engagement. The founders needed to hire a Senior Computer Vision + AI Engineer capable of owning the full ML pipeline—from model design to deployment—while bridging computer vision and large language models to make sense of visual data.',
+          points: [
+            'Cross-disciplinary depth: Most computer vision engineers are narrowly specialized and lack exposure to LLMs or multimodal architectures that combine vision and language.',
+            'Tight talent market: The few with this hybrid skill set were already in high demand.',
+            'Early-stage dynamics: The role required a hands-on builder comfortable with ambiguity and startup speed.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with CEO David Roger in a deeply collaborative, founder-to-founder search. A tight communication loop—texts, quick calls, weekend check-ins—allowing rapid iteration and immediate feedback.',
+          highlights: [
+            'Translated Hetal\'s technical roadmap into a precise candidate profile',
+            'Engaged cross-disciplinary AI talent aligned with both the mission and the tech stack',
+            'Delivered high-quality candidates extremely quickly, closing the search with a bull\'s-eye hire'
+          ]
+        },
+        results: [
+          'Search completed in under a month',
+          'Smooth integration with placed candidate successfully establishing himself in the CVAI leadership role',
+          'Code/Product is shipping on schedule',
+          'New customers on-boarded - Hetal has officially launched (out of stealth mode)'
+        ],
+        quote: {
+          text: 'Working with A-List gave us confidence the role would be filled fast with an exceptional hire. They understood our tech, our stage, and our urgency.',
+          author: 'David Roger',
+          title: 'CEO, Hetal'
+        }
+      },
+      {
+        id: 'two-boxes-evan',
+        company: 'Two Boxes',
+        video: {
+          url: 'https://www.youtube.com/embed/71VnbMNBniI',
+          thumbnail: 'https://img.youtube.com/vi/71VnbMNBniI/maxresdefault.jpg',
+          title: 'Evan Stalter - Two Boxes (Cofounder/CPO)'
+        },
+        overview: {
+          name: 'Two Boxes',
+          founded: '2023',
+          industry: 'AI-Driven Retail Tech',
+          headquarters: 'New York City, NY',
+          technology: 'Computer Vision + Generative AI',
+          stage: 'Seed (Investors include: SuperAngel, NVP and Nomad Ventures)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Two Boxes is reimagining how retailers analyze in-store behavior using computer vision and AI to optimize product placement and customer engagement. The founders needed to hire a Senior Computer Vision + AI Engineer capable of owning the full ML pipeline—from model design to deployment—while bridging computer vision and large language models to make sense of visual data.',
+          points: [
+            'Cross-disciplinary depth: Most computer vision engineers are narrowly specialized and lack exposure to LLMs or multimodal architectures that combine vision and language.',
+            'Tight talent market: The few with this hybrid skill set were already in high demand.',
+            'Early-stage dynamics: The role required a hands-on builder comfortable with ambiguity and startup speed.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with Cofounder/CPO Evan Stalter in a deeply collaborative, founder-to-founder search. A tight communication loop—texts, quick calls, weekend check-ins—allowing rapid iteration and immediate feedback.',
+          highlights: [
+            'Translated Two Boxes\'s technical roadmap into a precise candidate profile',
+            'Engaged cross-disciplinary AI talent aligned with both the mission and the tech stack',
+            'Delivered high-quality candidates extremely quickly, closing the search with a bull\'s-eye hire'
+          ]
+        },
+        results: [
+          'Search completed in under a month',
+          'Smooth integration with placed candidate successfully establishing himself in the CVAI leadership role',
+          'Code/Product is shipping on schedule',
+          'New customers on-boarded - Two Boxes has officially launched (out of stealth mode)'
+        ],
+        quote: {
+          text: 'Working with A-List gave us confidence the role would be filled fast with an exceptional hire. They understood our tech, our stage, and our urgency.',
+          author: 'Evan Stalter',
+          title: 'Cofounder/CPO, Two Boxes'
+        }
+      },
+      {
+        id: 'two-boxes-kyle',
+        company: 'Two Boxes',
+        video: {
+          url: 'https://www.youtube.com/embed/Fokw4cjivCg',
+          thumbnail: 'https://img.youtube.com/vi/Fokw4cjivCg/maxresdefault.jpg',
+          title: 'Kyle Bertin - Two Boxes (Cofounder/CEO)'
+        },
+        overview: {
+          name: 'Two Boxes',
+          founded: '2023',
+          industry: 'AI-Driven Retail Tech',
+          headquarters: 'New York City, NY',
+          technology: 'Computer Vision + Generative AI',
+          stage: 'Seed (Investors include: SuperAngel, NVP and Nomad Ventures)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Two Boxes is reimagining how retailers analyze in-store behavior using computer vision and AI to optimize product placement and customer engagement. The founders needed to hire a Senior Computer Vision + AI Engineer capable of owning the full ML pipeline—from model design to deployment—while bridging computer vision and large language models to make sense of visual data.',
+          points: [
+            'Cross-disciplinary depth: Most computer vision engineers are narrowly specialized and lack exposure to LLMs or multimodal architectures that combine vision and language.',
+            'Tight talent market: The few with this hybrid skill set were already in high demand.',
+            'Early-stage dynamics: The role required a hands-on builder comfortable with ambiguity and startup speed.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with Cofounder/CEO Kyle Bertin in a deeply collaborative, founder-to-founder search. A tight communication loop—texts, quick calls, weekend check-ins—allowing rapid iteration and immediate feedback.',
+          highlights: [
+            'Translated Two Boxes\'s technical roadmap into a precise candidate profile',
+            'Engaged cross-disciplinary AI talent aligned with both the mission and the tech stack',
+            'Delivered high-quality candidates extremely quickly, closing the search with a bull\'s-eye hire'
+          ]
+        },
+        results: [
+          'Search completed in under a month',
+          'Smooth integration with placed candidate successfully establishing himself in the CVAI leadership role',
+          'Code/Product is shipping on schedule',
+          'New customers on-boarded - Two Boxes has officially launched (out of stealth mode)'
+        ],
+        quote: {
+          text: 'Working with A-List gave us confidence the role would be filled fast with an exceptional hire. They understood our tech, our stage, and our urgency.',
+          author: 'Kyle Bertin',
+          title: 'Cofounder/CEO, Two Boxes'
+        }
+      },
+      {
+        id: 'elovee',
+        company: 'Elovee',
+        video: {
+          url: 'https://www.youtube.com/embed/Jb3CXJAdaWk',
+          thumbnail: 'https://img.youtube.com/vi/Jb3CXJAdaWk/maxresdefault.jpg',
+          title: 'Paul Campbell - Elovee (CEO)'
+        },
+        overview: {
+          name: 'Elovee',
+          founded: '2023',
+          industry: 'AI-Driven Retail Tech',
+          headquarters: 'New York City, NY',
+          technology: 'Computer Vision + Generative AI',
+          stage: 'Seed (Investors include: SuperAngel, NVP and Nomad Ventures)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Elovee is reimagining how retailers analyze in-store behavior using computer vision and AI to optimize product placement and customer engagement. The founders needed to hire a Senior Computer Vision + AI Engineer capable of owning the full ML pipeline—from model design to deployment—while bridging computer vision and large language models to make sense of visual data.',
+          points: [
+            'Cross-disciplinary depth: Most computer vision engineers are narrowly specialized and lack exposure to LLMs or multimodal architectures that combine vision and language.',
+            'Tight talent market: The few with this hybrid skill set were already in high demand.',
+            'Early-stage dynamics: The role required a hands-on builder comfortable with ambiguity and startup speed.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with CEO Paul Campbell in a deeply collaborative, founder-to-founder search. A tight communication loop—texts, quick calls, weekend check-ins—allowing rapid iteration and immediate feedback.',
+          highlights: [
+            'Translated Elovee\'s technical roadmap into a precise candidate profile',
+            'Engaged cross-disciplinary AI talent aligned with both the mission and the tech stack',
+            'Delivered high-quality candidates extremely quickly, closing the search with a bull\'s-eye hire'
+          ]
+        },
+        results: [
+          'Search completed in under a month',
+          'Smooth integration with placed candidate successfully establishing himself in the CVAI leadership role',
+          'Code/Product is shipping on schedule',
+          'New customers on-boarded - Elovee has officially launched (out of stealth mode)'
+        ],
+        quote: {
+          text: 'Working with A-List gave us confidence the role would be filled fast with an exceptional hire. They understood our tech, our stage, and our urgency.',
+          author: 'Paul Campbell',
+          title: 'CEO, Elovee'
+        }
+      },
+      {
+        id: 'newsela',
+        company: 'Newsela',
+        video: {
+          url: 'https://www.youtube.com/embed/9zD0SzvUmqk',
+          thumbnail: 'https://img.youtube.com/vi/9zD0SzvUmqk/maxresdefault.jpg',
+          title: 'Eric Bacolas - Newsela (Chief People Officer)'
+        },
+        overview: {
+          name: 'Newsela',
+          founded: '2023',
+          industry: 'AI-Driven Retail Tech',
+          headquarters: 'New York City, NY',
+          technology: 'Computer Vision + Generative AI',
+          stage: 'Seed (Investors include: SuperAngel, NVP and Nomad Ventures)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Newsela is reimagining how retailers analyze in-store behavior using computer vision and AI to optimize product placement and customer engagement. The founders needed to hire a Senior Computer Vision + AI Engineer capable of owning the full ML pipeline—from model design to deployment—while bridging computer vision and large language models to make sense of visual data.',
+          points: [
+            'Cross-disciplinary depth: Most computer vision engineers are narrowly specialized and lack exposure to LLMs or multimodal architectures that combine vision and language.',
+            'Tight talent market: The few with this hybrid skill set were already in high demand.',
+            'Early-stage dynamics: The role required a hands-on builder comfortable with ambiguity and startup speed.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with Chief People Officer Eric Bacolas in a deeply collaborative, founder-to-founder search. A tight communication loop—texts, quick calls, weekend check-ins—allowing rapid iteration and immediate feedback.',
+          highlights: [
+            'Translated Newsela\'s technical roadmap into a precise candidate profile',
+            'Engaged cross-disciplinary AI talent aligned with both the mission and the tech stack',
+            'Delivered high-quality candidates extremely quickly, closing the search with a bull\'s-eye hire'
+          ]
+        },
+        results: [
+          'Search completed in under a month',
+          'Smooth integration with placed candidate successfully establishing himself in the CVAI leadership role',
+          'Code/Product is shipping on schedule',
+          'New customers on-boarded - Newsela has officially launched (out of stealth mode)'
+        ],
+        quote: {
+          text: 'Working with A-List gave us confidence the role would be filled fast with an exceptional hire. They understood our tech, our stage, and our urgency.',
+          author: 'Eric Bacolas',
+          title: 'Chief People Officer, Newsela'
+        }
+      }
+    ]
   };
 </script>
 
@@ -427,14 +625,44 @@
     </div>
   </section>
 
-  <!-- Video Section -->
-  <section class="video-section">
+  <!-- Case Studies Section -->
+  <section class="case-studies">
     <div class="container">
-      <div class="video-wrapper">
-        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <!-- Section Header -->
+      <div class="case-studies__header">
+        <h2 class="case-studies__title">Case Studies</h2>
+        <p class="case-studies__subtitle">Real stories from our clients</p>
       </div>
-      <div class="video-thumbnails">
-        <!-- Video thumbnails will be populated by JavaScript -->
+
+      <!-- Thumbnail Carousel -->
+      <div class="case-studies__thumbnails">
+        <!-- Thumbnails will be populated by JavaScript -->
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="case-studies__content">
+        <!--
+          DOM Order: Video first for accessibility and mobile-first approach
+          Visual Order (Desktop): Content left (order: 1) | Video right (order: 2)
+          Visual Order (Tablet/Mobile): Video top, Content bottom (natural DOM order)
+        -->
+
+        <!-- Video Column (appears first in DOM, but on right on desktop via CSS order) -->
+        <div class="case-studies__video">
+          <div class="video-wrapper">
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Content Column (appears second in DOM, but on left on desktop via CSS order) -->
+        <div class="case-studies__content-area">
+          <!-- Content will be dynamically rendered by JavaScript -->
+          <!-- Desktop/Tablet: Tabs + Panels -->
+          <!-- Mobile: Sequential Cards -->
+        </div>
       </div>
     </div>
   </section>
