@@ -171,38 +171,6 @@
         ]
     },
 
-    // Video section configuration
-    // Displays featured videos with thumbnails for switching
-    videos: [
-    {
-        id: 'two-boxes',
-        // YouTube embed URL (must be in format: https://www.youtube.com/embed/VIDEO_ID)
-        url: 'https://www.youtube.com/embed/71VnbMNBniI',
-        // Title attribute for the iframe (for accessibility)
-        title: 'Evan Stalter - Two Boxes (Cofounder/CPO)',
-        // Thumbnail image URL (YouTube thumbnail or custom image)
-        thumbnail: 'https://img.youtube.com/vi/71VnbMNBniI/maxresdefault.jpg'
-      },
-      {
-        id: 'two-boxes-2',
-        url: 'https://www.youtube.com/embed/Fokw4cjivCg',
-        title: 'Kyle Bertin - Two Boxes (Cofounder/CEO)',
-        thumbnail: 'https://img.youtube.com/vi/Fokw4cjivCg/maxresdefault.jpg'
-      },
-      {
-        id: 'elovee',
-        url: 'https://www.youtube.com/embed/Jb3CXJAdaWk',
-        title: 'Paul Campbell  - Elovee (CEO)',
-        thumbnail: 'https://img.youtube.com/vi/Jb3CXJAdaWk/maxresdefault.jpg'
-      },
-      {
-        id: 'newsela',
-        url: 'https://www.youtube.com/embed/9zD0SzvUmqk',
-        title: 'Eric Bacolas - Newsela (Chief People Officer)',
-        thumbnail: 'https://img.youtube.com/vi/9zD0SzvUmqk/maxresdefault.jpg'
-      }
-    ],
-
     // Trust features section configuration
     // Highlights key selling points with icons and descriptions
     trustFeatures: {
@@ -351,7 +319,229 @@
           }
         }
       ]
-    }
+    },
+
+    // Case Studies section configuration
+    // Displays detailed case studies with video testimonials and structured content
+    caseStudies: [
+      {
+        id: 'hetal',
+        company: 'Hetal',
+        video: {
+          url: 'https://www.youtube.com/embed/XZZsS2FRv1g',
+          thumbnail: 'https://img.youtube.com/vi/XZZsS2FRv1g/sddefault.jpg',
+          title: 'David Roger - Hetal (CEO)'
+        },
+        overview: {
+          name: 'Hetal',
+          founded: '2023',
+          industry: 'AI-Driven Retail Tech',
+          headquarters: 'New York City, NY',
+          technology: 'Computer Vision + Generative AI',
+          stage: 'Seed (Investors include: SuperAngel, NVP and Nomad Ventures)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Hetal is reimagining how retailers analyze in-store behavior using computer vision and AI to optimize product placement and customer engagement. The founders needed to hire a Senior Computer Vision + AI Engineer capable of owning the full ML pipeline—from model design to deployment—while bridging computer vision and large language models to make sense of visual data.',
+          points: [
+            'Cross-disciplinary depth: Most computer vision engineers are narrowly specialized and lack exposure to LLMs or multimodal architectures that combine vision and language.',
+            'Tight talent market: The few with this hybrid skill set were already in high demand.',
+            'Early-stage dynamics: The role required a hands-on builder comfortable with ambiguity and startup speed.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with CEO David Roger in a deeply collaborative, founder-to-founder search. A tight communication loop—texts, quick calls, weekend check-ins—allowing rapid iteration and immediate feedback.',
+          highlights: [
+            'Translated Hetal\'s technical roadmap into a precise candidate profile',
+            'Engaged cross-disciplinary AI talent aligned with both the mission and the tech stack',
+            'Delivered high-quality candidates extremely quickly, closing the search with a bull\'s-eye hire'
+          ]
+        },
+        results: [
+          'Search completed in under a month',
+          'Smooth integration with placed candidate successfully establishing himself in the CVAI leadership role',
+          'Code/Product is shipping on schedule',
+          'New customers on-boarded - Hetal has officially launched (out of stealth mode)'
+        ],
+        quote: {
+          text: 'Working with A-List gave us confidence the role would be filled fast with an exceptional hire. They understood our tech, our stage, and our urgency.',
+          author: 'David Roger',
+          title: 'CEO, Hetal'
+        }
+      },
+      {
+        id: 'elovee',
+        company: 'Elovee',
+        video: {
+          url: 'https://www.youtube.com/embed/Jb3CXJAdaWk',
+          thumbnail: 'https://img.youtube.com/vi/Jb3CXJAdaWk/maxresdefault.jpg',
+          title: 'Paul Campbell - Elovee (CEO)'
+        },
+        overview: {
+          name: 'Elovee',
+          founded: '2019',
+          industry: 'Health Tech/Dementia Care',
+          headquarters: 'New York City, NY',
+          technology: 'AI/ML/NLP + Video Avatars',
+          stage: 'Seed ($15M raised)',
+          teamSize: '≈15 employees'
+        },
+        challenge: {
+          description: 'Elovee was founded with the mission to transform dementia care, combining AI, data science, design, and neuropsychology to deliver comforting voice and visual interactions with loved ones for seniors—available 24/7. The founders needed to hire a Head of AI/ML/NLP who could serve as the technical co-founder—leading the full stack from AI and NLP to mobile and web, while building and scaling a multidisciplinary team.',
+          points: [
+            'Rare skill combination: The role required deep expertise across AI, machine learning, NLP, video avatar technology, mobile development, and scalable architecture—plus leadership experience to build and manage a team.',
+            'Healthcare complexity: The platform needed to comply with strict healthcare regulations (HIPAA, FSA, GDPR) while delivering innovative technology for a sensitive demographic.',
+            'Founder-level role: This individual would shape company strategy alongside the CEO, requiring entrepreneurial mindset, business acumen, and technical excellence.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with the CEO at elovee in a deeply collaborative, mission-driven search. An iterative process was critical to success—since a role like this really didn\'t exist at other companies, we had to use creativity and source candidates with the unique combination of deep machine learning and natural language processing experience, with the ability to lead, inspire, and build a team.',
+          highlights: [
+            'Mapped the intersection of AI/ML/NLP expertise to identify the right candidates who aligned with the mission and had scrappy startup experience',
+            'Leveraged creative sourcing strategies to find leaders with the rare combination of the above'
+          ]
+        },
+        results: [
+          'Search completed in nine weeks',
+          'Head of AI/ML/NLP successfully onboarded and leading product strategy',
+          'MVP launched on schedule with pilot customers onboarded'
+        ],
+        quote: {
+          text: 'I didn\'t want a big agency. I wanted a partner who was hands-on, values-aligned, and understood the pace of change in AI — that\'s exactly what I found in A-List.',
+          author: 'Paul Campbell',
+          title: 'CEO, elovee'
+        }
+      },
+      {
+        id: 'two-boxes-evan',
+        company: 'Two Boxes',
+        video: {
+          url: 'https://www.youtube.com/embed/71VnbMNBniI',
+          thumbnail: 'https://img.youtube.com/vi/71VnbMNBniI/maxresdefault.jpg',
+          title: 'Evan Stalter - Two Boxes (Co-Founder & CPO)'
+        },
+        overview: {
+          name: 'Two Boxes',
+          founded: '2022',
+          industry: 'E-Commerce Returns Tech / Sustainable Logistics',
+          headquarters: 'Denver, Colorado',
+          technology: 'SaaS Returns Processing Platform',
+          stage: 'Series A (Investors include: SuperAngel, Assembly, and Matchbook)',
+          teamSize: '11-50 employees'
+        },
+        challenge: {
+          description: 'Two Boxes is transforming e-commerce returns from a liability into an asset. Their innovative SaaS platform has helped over two dozen 3PL customers and 120+ brands process over $100M worth of returned inventory, preventing thousands of units from ending up in landfills while providing invaluable data insights. The founders needed to hire a Senior Frontend Engineer capable of building scalable, performant web applications that would serve both warehouse operations and brand analytics dashboards.',
+          points: [
+            'Technical depth in a niche stack: The role required expertise in TypeScript, React, and modern frontend architecture.',
+            'Startup experience and culture fit: The co-founders have built an incredible culture at Two Boxes, and finding the right match with both the technical skill set and alignment with their values was essential.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with Co-Founder & CPO Evan Stalter in a highly collaborative, technically-focused search. A quick process with evolving interview steps, technical rounds, and the ability to move quickly enabled us to identify and close exceptional talent efficiently.',
+          highlights: [
+            'Engaged senior frontend engineers from SaaS backgrounds with demonstrated ability to build customer-facing applications at scale',
+            'Delivered high-caliber candidates quickly, closing the search with an exceptional hire who brought both the technical chops and product mindset needed'
+          ]
+        },
+        results: [
+          'Search completed in under 6 weeks',
+          'Hired engineer ramped quickly and is now driving key product features',
+          'Platform continues to scale across 120+ brands globally',
+          'Two Boxes recently raised $5.3M Series A to accelerate growth'
+        ],
+        quote: {
+          text: 'The quality of candidates was outstanding. A-List filtered out anyone who wouldn\'t make it through our cut, and every person we spoke with was impressive.',
+          author: 'Evan Stalter',
+          title: 'Co-Founder & CPO, Two Boxes'
+        }
+      },
+      {
+        id: 'two-boxes-kyle',
+        company: 'Two Boxes',
+        video: {
+          url: 'https://www.youtube.com/embed/Fokw4cjivCg',
+          thumbnail: 'https://img.youtube.com/vi/Fokw4cjivCg/maxresdefault.jpg',
+          title: 'Kyle Bertin - Two Boxes (Co-Founder)'
+        },
+        overview: {
+          name: 'Two Boxes',
+          founded: '2022',
+          industry: 'E-Commerce Returns Tech / Sustainable Logistics',
+          headquarters: 'Denver, Colorado',
+          technology: 'SaaS Returns Processing Platform',
+          stage: 'Series A (Investors include: SuperAngel, Assembly, and Matchbook)',
+          teamSize: '11-50 employees'
+        },
+        challenge: {
+          description: 'Two Boxes was accelerating revenue growth and needed to hire an Enterprise Account Executive to close their biggest contracts with top-tier customers.',
+          points: [
+            'Extreme time pressure: Co-Founder Kyle Bertin was going on paternity leave, creating an urgent deadline to close the search before his departure.',
+            'Holiday timing: The search coincided with the holiday season when most candidates and companies slow down recruiting activity.',
+            'Specialized skill set: The role required 8+ years of enterprise SaaS sales experience with proven ability to close high-value deals.'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered directly with Co-Founder Kyle Bertin in an exceptionally responsive, time-sensitive search that prioritized speed without compromising quality.',
+          highlights: [
+            'Maintained exceptional responsiveness during holiday season',
+            'Executed searches with speed and precision to meet urgent deadline before paternity leave'
+          ]
+        },
+        results: [
+          'Search completed before Kyle\'s paternity leave',
+          'Hired AE is driving enterprise pipeline and closing high-value contracts',
+          'Two Boxes continues to scale across 120+ brands globally',
+          'Company recently raised $5.3M Series A to accelerate growth'
+        ],
+        quote: {
+          text: 'You do what needs to be done — for example, over the holidays you helped us place a role by getting on calls the day after Christmas. Not a lot of folks are willing to do that kind of thing. That was really impactful for us to keep the business moving forward.',
+          author: 'Kyle Bertin',
+          title: 'Co-Founder, Two Boxes'
+        }
+      },
+      {
+        id: 'newsela',
+        company: 'Newsela',
+        video: {
+          url: 'https://www.youtube.com/embed/9zD0SzvUmqk',
+          thumbnail: 'https://img.youtube.com/vi/9zD0SzvUmqk/maxresdefault.jpg',
+          title: 'Newsela Leadership Team'
+        },
+        overview: {
+          name: 'Newsela',
+          founded: '2013',
+          industry: 'EdTech',
+          headquarters: 'New York, New York',
+          technology: 'K-12 Learning Platform',
+          stage: 'Series D (Investors include: Kleiner Perkins, TCV)',
+          teamSize: '251-500 employees'
+        },
+        challenge: {
+          description: 'Newsela is transforming literacy education by turning real-world content from trusted sources into engaging learning materials for K-12 classrooms. As Newsela scaled from Series B through Series D, the company needed to build a world-class leadership team across multiple functions. The hiring challenge was threefold: finding exceptional talent in a competitive market, ensuring cultural alignment with Newsela\'s educational mission, and identifying leaders who could scale with the company\'s rapid growth trajectory.',
+          points: [
+            'Finding exceptional talent in a competitive market',
+            'Ensuring cultural alignment with Newsela\'s educational mission',
+            'Identifying leaders who could scale with rapid growth trajectory'
+          ]
+        },
+        solution: {
+          description: 'A-List partnered with Newsela\'s leadership team across multiple disciplines, developing a deep understanding of the company\'s unique culture, mission-driven focus, and evolving talent needs.',
+          highlights: [
+            'Beginning with a CMO search when Newsela was Series B, A-List continued to partner on multiple roles, including Chief Customer Success Officer, SVP of Sales, VP of Design, VP Product Management, VP Product Marketing, and Director of Technical Product Marketing',
+            'Developed targeted assessment criteria to evaluate candidates\' alignment with Newsela\'s educational mission and culture of continuous learning'
+          ]
+        },
+        results: [
+          'Nine successful placements including Chief Customer Success Officer, SVP of Sales, VP of Design, VP Product Management, VP Product Marketing, and Director of Technical Product Marketing',
+          'Platform serving 2.5M teachers and 37M students in 90% of U.S. K-12 schools'
+        ],
+        quote: {
+          text: 'We were able to convince amazingly talented people who were super happy in their roles to come talk to us, because Allen was able to embody who and what we were.',
+          author: 'Newsela Leadership Team',
+          title: ''
+        }
+      }
+    ]
   };
 </script>
 
@@ -427,14 +617,44 @@
     </div>
   </section>
 
-  <!-- Video Section -->
-  <section class="video-section">
+  <!-- Case Studies Section -->
+  <section class="case-studies">
     <div class="container">
-      <div class="video-wrapper">
-        <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+      <!-- Section Header -->
+      <div class="case-studies__header">
+        <h2 class="case-studies__title">Case Studies</h2>
+        <p class="case-studies__subtitle">Real stories from our clients</p>
       </div>
-      <div class="video-thumbnails">
-        <!-- Video thumbnails will be populated by JavaScript -->
+
+      <!-- Main Content Area -->
+      <div class="case-studies__content">
+        <!--
+          DOM Order: Video first for accessibility and mobile-first approach
+          Visual Order (Desktop): Content left (order: 1) | Video right (order: 2)
+          Visual Order (Tablet/Mobile): Video top, Content bottom (natural DOM order)
+        -->
+
+        <!-- Video Column (appears first in DOM, but on right on desktop via CSS order) -->
+        <div class="case-studies__video">
+          <div class="video-wrapper">
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Content Column (appears second in DOM, but on left on desktop via CSS order) -->
+        <div class="case-studies__content-area">
+          <!-- Content will be dynamically rendered by JavaScript -->
+          <!-- Desktop/Tablet: Tabs + Panels -->
+          <!-- Mobile: Sequential Cards -->
+        </div>
+      </div>
+
+      <!-- Thumbnail Carousel -->
+      <div class="case-studies__thumbnails">
+        <!-- Thumbnails will be populated by JavaScript -->
       </div>
     </div>
   </section>
