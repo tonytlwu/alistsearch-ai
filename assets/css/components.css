@@ -1796,6 +1796,7 @@
 .case-study-quote__text::before,
 .case-study-quote__text::after {
   font-size: 32px;
+  line-height: 0;
   color: var(--color-secondary);
   opacity: 0.5;
 }
