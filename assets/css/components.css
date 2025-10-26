@@ -979,12 +979,6 @@
 .trust-features .card:nth-child(2) { --stagger-delay: 0.1s; }
 .trust-features .card:nth-child(3) { --stagger-delay: 0.2s; }
 
-/* Video Section */
-.video-section {
-  padding: 1rem 0;
-  background: #000;
-}
-
 /* Enhanced Company-based Credibility Section */
 .credibility {
   padding: var(--spacing-section) 0;

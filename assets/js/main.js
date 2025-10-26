@@ -364,22 +364,6 @@ function handleTabClick(clickedTab, container) {
 }
 
 // Helper functions to render each section
-function renderOverviewCard(overview) {
-    if (!overview) return '';
-    return `
-        <div class="case-study-card">
-            <h3 class="case-study-card__title">Company Overview</h3>
-            <div class="case-study-overview">
-                ${Object.entries(overview).map(([key, value]) => `
-                    <div class="case-study-overview__item">
-                        <div class="case-study-overview__label">${formatLabel(key)}</div>
-                        <div class="case-study-overview__value">${value}</div>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-}
 
 function renderOverviewContent(overview) {
     if (!overview) return '';
@@ -395,21 +379,6 @@ function renderOverviewContent(overview) {
     `;
 }
 
-function renderChallengeCard(challenge) {
-    if (!challenge) return '';
-    return `
-        <div class="case-study-card">
-            <h3 class="case-study-card__title">The Challenge</h3>
-            <div class="case-study-content__description">${challenge.description}</div>
-            ${challenge.points ? `
-                <div class="case-study-content__subheading">Why it was challenging:</div>
-                <ul class="case-study-content__list">
-                    ${challenge.points.map(point => `<li>${point}</li>`).join('')}
-                </ul>
-            ` : ''}
-        </div>
-    `;
-}
 
 function renderChallengeContent(challenge) {
     if (!challenge) return '';
@@ -424,21 +393,6 @@ function renderChallengeContent(challenge) {
     `;
 }
 
-function renderSolutionCard(solution) {
-    if (!solution) return '';
-    return `
-        <div class="case-study-card">
-            <h3 class="case-study-card__title">Our Solution</h3>
-            <div class="case-study-content__description">${solution.description}</div>
-            ${solution.highlights ? `
-                <div class="case-study-content__subheading">Execution Highlights:</div>
-                <ul class="case-study-content__list">
-                    ${solution.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
-                </ul>
-            ` : ''}
-        </div>
-    `;
-}
 
 function renderSolutionContent(solution) {
     if (!solution) return '';
@@ -453,17 +407,6 @@ function renderSolutionContent(solution) {
     `;
 }
 
-function renderResultsCard(results) {
-    if (!results || !results.length) return '';
-    return `
-        <div class="case-study-card">
-            <h3 class="case-study-card__title">Results</h3>
-            <ul class="case-study-results">
-                ${results.map(result => `<li>${result}</li>`).join('')}
-            </ul>
-        </div>
-    `;
-}
 
 function renderResultsContent(results) {
     if (!results || !results.length) return '';
@@ -474,19 +417,6 @@ function renderResultsContent(results) {
     `;
 }
 
-function renderQuoteCard(quote) {
-    if (!quote) return '';
-    return `
-        <div class="case-study-card">
-            <h3 class="case-study-card__title">Client Testimonial</h3>
-            <div class="case-study-quote">
-                <div class="case-study-quote__text">${quote.text}</div>
-                <div class="case-study-quote__author">${quote.author}</div>
-                ${quote.title ? `<div class="case-study-quote__title">${quote.title}</div>` : ''}
-            </div>
-        </div>
-    `;
-}
 
 function renderQuoteContent(quote) {
     if (!quote) return '';
