@@ -1830,10 +1830,13 @@
 .case-studies__thumbnails {
   display: flex;
   gap: 1rem;
-  justify-content: center;
   margin-top: 2rem;
   overflow-x: auto;
   padding: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  width: max-content;
 }
 
 /* Performance optimizations */
