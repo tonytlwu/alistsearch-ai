@@ -573,7 +573,7 @@ class ScrollController {
     }
 
     setupScrollBounceHint() {
-        // Only show bounce hint on the hero section and not on very short screens
+        // Only show bounce hint when scroll indicator is visible
         if (window.innerHeight < 600) return;
 
         // Start the timer for the bounce hint after 5 seconds of inactivity
