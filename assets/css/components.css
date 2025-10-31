@@ -32,7 +32,7 @@
 }
 
 .hero {
-  padding: 8rem 0 10rem;
+  padding: 5rem 0 6rem;
   text-align: center;
   background: var(--gradient-hero);
   color: var(--color-primary-text);
@@ -487,7 +487,7 @@
 
 /* Enhanced Metrics Section */
 .hero__metrics {
-  margin-top: 6rem;
+  margin-top: 3rem;
   opacity: 0;
   transform: translateY(30px);
   transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
@@ -727,7 +727,7 @@
 /* Interactive Scroll Indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

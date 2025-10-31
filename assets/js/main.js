@@ -500,6 +500,7 @@ class ScrollController {
     init() {
         this.setupScrollIndicator();
         this.setupRevealAnimations();
+        this.setupScrollBounceHint();
 
         window.addEventListener('scroll', () => {
             if (!this.ticking) {
@@ -509,6 +510,8 @@ class ScrollController {
                 });
                 this.ticking = true;
             }
+            // Reset the bounce hint timer when user scrolls
+            this.resetScrollBounceTimer();
         });
     }
 
@@ -567,6 +570,51 @@ class ScrollController {
                 }, delay);
             }
         });
+    }
+
+    setupScrollBounceHint() {
+        // Only show bounce hint on the hero section and not on very short screens
+        if (window.innerHeight < 600) return;
+
+        // Start the timer for the bounce hint after 5 seconds of inactivity
+        this.bounceHintTimer = setTimeout(() => this.triggerScrollBounce(), 5000);
+    }
+
+    resetScrollBounceTimer() {
+        // Clear the existing timer if it exists
+        if (this.bounceHintTimer) {
+            clearTimeout(this.bounceHintTimer);
+        }
+
+        // Only reset if user is still in the hero section
+        const hero = document.querySelector('.hero');
+        if (hero && hero.getBoundingClientRect().bottom > 0) {
+            // Reset the timer for another 5 seconds
+            this.bounceHintTimer = setTimeout(() => this.triggerScrollBounce(), 5000);
+        }
+    }
+
+    triggerScrollBounce() {
+        // Check if user is still in the hero section and hasn't scrolled
+        const hero = document.querySelector('.hero');
+        if (!hero || hero.getBoundingClientRect().bottom <= 0) return;
+
+        // Only trigger if page hasn't been scrolled
+        if (window.scrollY > 20) return;
+
+        // Scroll down 80px smoothly
+        window.scrollBy({
+            top: 80,
+            behavior: 'smooth'
+        });
+
+        // After 600ms, scroll back up to original position
+        setTimeout(() => {
+            window.scrollBy({
+                top: -80,
+                behavior: 'smooth'
+            });
+        }, 600);
     }
 }
 
